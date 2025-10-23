@@ -1,13 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card" />
+      {/* Background image with blur */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ 
+          backgroundImage: `url(${heroBg})`,
+          filter: 'blur(8px)',
+          transform: 'scale(1.1)'
+        }}
+      />
       
-      {/* Animated background elements */}
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/80" />
+      
+      {/* Gaming grid overlay */}
+      <div className="absolute inset-0 gaming-grid opacity-30" />
+      
+      {/* Animated accent lines */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-64 h-64 bg-primary rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
@@ -16,7 +30,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas leading-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas leading-tight glitch scan-line">
             Пирсинг Профи
           </h1>
           
@@ -59,15 +73,15 @@ const Hero = () => {
 
           {/* Trust indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 max-w-3xl mx-auto">
-            <div className="space-y-2 p-4 rounded-lg gradient-card-pink hover-glow">
+            <div className="space-y-2 p-4 rounded-lg gradient-card-pink hover-glow scan-line backdrop-blur-sm">
               <div className="text-3xl font-bebas text-primary">2017</div>
               <div className="text-sm text-muted-foreground">Работаем с</div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg gradient-card-purple hover-glow">
+            <div className="space-y-2 p-4 rounded-lg gradient-card-purple hover-glow scan-line backdrop-blur-sm">
               <div className="text-3xl font-bebas text-secondary">100%</div>
               <div className="text-sm text-muted-foreground">Стерильность</div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg gradient-card-cyan hover-glow">
+            <div className="space-y-2 p-4 rounded-lg gradient-card-cyan hover-glow scan-line backdrop-blur-sm">
               <div className="text-3xl font-bebas text-accent">НТВ</div>
               <div className="text-sm text-muted-foreground">Эксперты</div>
             </div>
