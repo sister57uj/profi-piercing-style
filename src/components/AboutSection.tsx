@@ -6,19 +6,22 @@ const AboutSection = () => {
       icon: Shield,
       title: "Безопасно",
       description: "Химическая и термическая стерилизация, одноразовые иглы и перчатки. Вскрываем упаковки при вас.",
-      color: "neon-text-pink"
+      colorClass: "text-primary",
+      gradientClass: "gradient-card-pink"
     },
     {
       icon: Award,
       title: "Качественно",
       description: "Сертифицированные мастера с медицинским образованием. Эксперты НТВ в проекте 'Чудо техники' (2018).",
-      color: "neon-text-purple"
+      colorClass: "text-secondary",
+      gradientClass: "gradient-card-purple"
     },
     {
       icon: Sparkles,
       title: "Красиво",
       description: "Эксклюзивные украшения, индивидуальный подход. Создаем пирсинг, который подчеркнет вашу уникальность.",
-      color: "neon-text-cyan"
+      colorClass: "text-accent",
+      gradientClass: "gradient-card-cyan"
     }
   ];
 
@@ -41,21 +44,21 @@ const AboutSection = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div
-                  key={feature.title}
-                  className="bg-background p-8 rounded-lg border border-border hover:border-primary transition-all hover-glow animate-fade-in"
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <div className="mb-4">
-                    <Icon className={`h-12 w-12 ${feature.color}`} />
-                  </div>
-                  <h3 className={`text-2xl font-bebas mb-3 ${feature.color}`}>
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {feature.description}
-                  </p>
+              <div
+                key={feature.title}
+                className={`p-8 rounded-lg ${feature.gradientClass} hover-glow animate-fade-in`}
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <div className="mb-4">
+                  <Icon className={`h-12 w-12 ${feature.colorClass}`} />
                 </div>
+                <h3 className={`text-2xl font-bebas mb-3 ${feature.colorClass}`}>
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground">
+                  {feature.description}
+                </p>
+              </div>
               );
             })}
           </div>

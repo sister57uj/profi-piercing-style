@@ -34,7 +34,7 @@ const Portfolio = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                  <h3 className="text-2xl font-bebas mb-2 neon-text-pink group-hover:scale-110 transition-transform">
+                  <h3 className="text-2xl font-bebas mb-2 gradient-text-pink group-hover:scale-110 transition-transform">
                     {work.title}
                   </h3>
                   <span className="text-sm text-muted-foreground px-3 py-1 bg-background/50 rounded-full">

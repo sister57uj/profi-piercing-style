@@ -41,7 +41,7 @@ const Promotions = () => {
               <Sparkles className="h-5 w-5 text-primary" />
               <span className="text-sm font-semibold text-primary">Акция</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bebas mb-4 neon-text-pink">
+            <h2 className="text-4xl md:text-5xl font-bebas mb-4 gradient-text-pink">
               Специальное предложение
             </h2>
             <p className="text-lg text-foreground mb-2">

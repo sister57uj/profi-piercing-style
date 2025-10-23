@@ -21,13 +21,13 @@ const Hero = () => {
           </h1>
           
           <div className="space-y-2">
-            <p className="text-3xl md:text-5xl font-bebas neon-text-pink animate-pulse-neon">
+            <p className="text-3xl md:text-5xl font-bebas gradient-text-pink">
               Безопасно.
             </p>
-            <p className="text-3xl md:text-5xl font-bebas neon-text-purple animate-pulse-neon" style={{ animationDelay: "0.3s" }}>
+            <p className="text-3xl md:text-5xl font-bebas gradient-text-purple">
               Качественно.
             </p>
-            <p className="text-3xl md:text-5xl font-bebas neon-text-cyan animate-pulse-neon" style={{ animationDelay: "0.6s" }}>
+            <p className="text-3xl md:text-5xl font-bebas gradient-text-cyan">
               Красиво.
             </p>
           </div>
@@ -59,16 +59,16 @@ const Hero = () => {
 
           {/* Trust indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 max-w-3xl mx-auto">
-            <div className="space-y-2">
-              <div className="text-3xl font-bebas neon-text-pink">2017</div>
+            <div className="space-y-2 p-4 rounded-lg gradient-card-pink hover-glow">
+              <div className="text-3xl font-bebas text-primary">2017</div>
               <div className="text-sm text-muted-foreground">Работаем с</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bebas neon-text-purple">100%</div>
+            <div className="space-y-2 p-4 rounded-lg gradient-card-purple hover-glow">
+              <div className="text-3xl font-bebas text-secondary">100%</div>
               <div className="text-sm text-muted-foreground">Стерильность</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bebas neon-text-cyan">НТВ</div>
+            <div className="space-y-2 p-4 rounded-lg gradient-card-cyan hover-glow">
+              <div className="text-3xl font-bebas text-accent">НТВ</div>
               <div className="text-sm text-muted-foreground">Эксперты</div>
             </div>
           </div>
