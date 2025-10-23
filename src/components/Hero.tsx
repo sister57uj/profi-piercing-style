@@ -4,95 +4,91 @@ import heroBg from "@/assets/hero-bg-new.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background image with blur */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ 
-          backgroundImage: `url(${heroBg})`,
-          filter: 'blur(8px)',
-          transform: 'scale(1.1)'
-        }}
-      />
+    <section 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url(${heroBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      {/* Medical grid pattern */}
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
+        backgroundSize: '50px 50px'
+      }} />
       
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/80" />
-      
-      {/* Gaming grid overlay */}
-      <div className="absolute inset-0 gaming-grid opacity-30" />
-      
-      {/* Animated accent lines */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-primary rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas leading-tight tracking-wider glitch">
-            Пирсинг Профи
-          </h1>
-          
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-            <p className="text-3xl md:text-5xl font-bebas gradient-text-pink">
-              Безопасно.
-            </p>
-            <p className="text-3xl md:text-5xl font-bebas gradient-text-purple">
-              Качественно.
-            </p>
-            <p className="text-3xl md:text-5xl font-bebas gradient-text-cyan">
-              Красиво.
+        <div className="max-w-5xl mx-auto text-center space-y-12 animate-fade-in">
+          <div className="space-y-4">
+            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+              <p className="text-primary text-sm font-medium tracking-wide">МЕДИЦИНСКИЙ ПОДХОД</p>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-tight">
+              Профессиональный
+              <span className="block text-primary mt-2">Пирсинг</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Стерильность, безопасность и красота в каждой процедуре
             </p>
           </div>
-
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Профессиональный пирсинг в Москве. Создаем твой стиль с заботой о здоровье с 2017 года
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-lg px-8"
+          
+          {/* Medical standards badges */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 max-w-3xl mx-auto">
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="text-foreground font-semibold text-lg">Стерильность</p>
+              <p className="text-muted-foreground text-sm mt-2">Медицинские стандарты</p>
+            </div>
+            
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+              </div>
+              <p className="text-foreground font-semibold text-lg">Безопасность</p>
+              <p className="text-muted-foreground text-sm mt-2">Сертифицированные мастера</p>
+            </div>
+            
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <p className="text-foreground font-semibold text-lg">Красота</p>
+              <p className="text-muted-foreground text-sm mt-2">Индивидуальный подход</p>
+            </div>
+          </div>
+          
+          <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              asChild 
+              size="lg" 
+              className="text-lg px-10 py-7 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-primary/25"
             >
               <a href="https://wa.me/79858504801">
-                Записаться на сеанс
-                <ArrowRight className="ml-2 h-5 w-5" />
+                Записаться на консультацию
+                <ArrowRight className="ml-2" />
               </a>
             </Button>
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8"
+              className="text-lg px-10 py-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold rounded-full transition-all"
             >
               <a href="#portfolio">Портфолио</a>
             </Button>
           </div>
-
-          {/* Trust indicators */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 max-w-3xl mx-auto">
-            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
-              <div className="text-3xl font-bebas text-primary">2017</div>
-              <div className="text-sm text-muted-foreground">Работаем с</div>
-            </div>
-            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
-              <div className="text-3xl font-bebas text-secondary">100%</div>
-              <div className="text-sm text-muted-foreground">Стерильность</div>
-            </div>
-            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
-              <div className="text-3xl font-bebas text-accent">НТВ</div>
-              <div className="text-sm text-muted-foreground">Эксперты</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
         </div>
       </div>
     </section>

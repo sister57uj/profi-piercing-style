@@ -8,51 +8,36 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark theme - always dark */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
-
-    /* Neon pink primary */
-    --primary: 328 100% 54%;
-    --primary-foreground: 0 0% 98%;
+    /* Medical Professional Theme - Dark Mode */
+    --background: 220 20% 8%;
+    --foreground: 210 20% 98%;
+    --card: 220 18% 12%;
+    --card-foreground: 210 20% 98%;
+    --popover: 220 18% 12%;
+    --popover-foreground: 210 20% 98%;
     
-    /* Neon purple secondary */
-    --secondary: 264 79% 58%;
-    --secondary-foreground: 0 0% 98%;
-
-    /* Neon cyan accent */
-    --accent: 158 100% 52%;
-    --accent-foreground: 0 0% 4%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 328 100% 54%;
-
-    --radius: 0.5rem;
-
-    /* Neon glow shadows */
-    --neon-pink-glow: 0 0 20px hsl(328 100% 54% / 0.5);
-    --neon-purple-glow: 0 0 20px hsl(264 79% 58% / 0.5);
-    --neon-cyan-glow: 0 0 20px hsl(158 100% 52% / 0.5);
+    /* Medical cyan/teal accent */
+    --primary: 187 85% 55%;
+    --primary-foreground: 220 20% 8%;
+    
+    /* Professional grays */
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 70%;
+    --accent: 187 85% 55%;
+    --accent-foreground: 220 20% 8%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 15% 22%;
+    --input: 220 15% 18%;
+    --ring: 187 85% 55%;
+    
+    --radius: 0.75rem;
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* Gaming style effects */
-    --glow-intensity: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
-    --grid-color: hsl(var(--primary) / 0.1);
   }
 }
 
@@ -63,138 +48,57 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.08em;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.02em;
     font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  section {
+    padding: 4rem 1rem;
   }
 }
 
 @layer components {
-  /* Gradient text effects */
-  .gradient-text-pink {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Medical professional effects */
+  .sterile-glow {
+    animation: sterile-glow 2s ease-in-out infinite;
   }
   
-  .gradient-text-purple {
-    background: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  @keyframes sterile-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.2);
+    }
   }
   
-  .gradient-text-cyan {
-    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .medical-pulse {
+    animation: medical-pulse 3s ease-in-out infinite;
   }
   
-  /* Card gradient backgrounds */
-  .gradient-card-pink {
-    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--primary) / 0.1));
-    border: 1px solid hsl(var(--primary) / 0.3);
+  @keyframes medical-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
   }
   
-  .gradient-card-purple {
-    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--secondary) / 0.1));
-    border: 1px solid hsl(var(--secondary) / 0.3);
-  }
-  
-  .gradient-card-cyan {
-    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--accent) / 0.1));
-    border: 1px solid hsl(var(--accent) / 0.3);
-  }
-  
-  .hover-glow {
+  .hover-lift {
     transition: var(--transition-smooth);
   }
   
-  .hover-glow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px hsl(var(--primary) / 0.2);
-  }
-  
-  /* Gaming grid background */
-  .gaming-grid {
-    background-image: 
-      linear-gradient(var(--grid-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: grid-move 20s linear infinite;
-  }
-  
-  @keyframes grid-move {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 50px 50px;
-    }
-  }
-  
-  /* Scan line effect */
-  .scan-line {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .scan-line::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, hsl(var(--accent)), transparent);
-    animation: scan 3s linear infinite;
-  }
-  
-  @keyframes scan {
-    0% {
-      left: -100%;
-      top: 0;
-    }
-    50% {
-      left: 100%;
-      top: 50%;
-    }
-    100% {
-      left: 100%;
-      top: 100%;
-    }
-  }
-  
-  /* Glitch effect */
-  .glitch {
-    position: relative;
-  }
-  
-  .glitch:hover {
-    animation: glitch 0.3s ease-in-out;
-  }
-  
-  @keyframes glitch {
-    0%, 100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-2px, 2px);
-    }
-    40% {
-      transform: translate(-2px, -2px);
-    }
-    60% {
-      transform: translate(2px, 2px);
-    }
-    80% {
-      transform: translate(2px, -2px);
-    }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px hsl(var(--primary) / 0.15);
   }
 }

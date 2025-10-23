@@ -64,9 +64,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'bebas': ['Bebas Neue', 'sans-serif'],
-        'montserrat': ['Montserrat', 'sans-serif'],
-        'orbitron': ['Orbitron', 'sans-serif'],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Poppins", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
