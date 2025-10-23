@@ -44,12 +44,12 @@ const Portfolio = () => {
             {works.map((work, index) => (
               <div
                 key={work.title}
-                className="group relative aspect-square bg-card rounded-lg overflow-hidden border border-border hover:border-primary transition-all hover-glow scan-line animate-fade-in backdrop-blur-sm"
+                className="group relative aspect-square bg-card rounded-lg overflow-hidden border border-primary/30 hover:border-primary/60 transition-all hover-glow animate-fade-in backdrop-blur-sm"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                  <h3 className="text-2xl font-bebas mb-2 gradient-text-pink group-hover:scale-110 transition-transform glitch">
+                  <h3 className="text-2xl font-bebas mb-2 gradient-text-pink group-hover:scale-110 transition-transform tracking-wide">
                     {work.title}
                   </h3>
                   <span className="text-sm text-muted-foreground px-3 py-1 bg-background/50 rounded-full border border-primary/30">

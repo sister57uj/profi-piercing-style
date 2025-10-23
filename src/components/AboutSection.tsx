@@ -46,13 +46,13 @@ const AboutSection = () => {
               return (
               <div
                 key={feature.title}
-                className={`p-8 rounded-lg ${feature.gradientClass} hover-glow animate-fade-in`}
+                className="p-8 rounded-lg bg-card/50 border border-primary/30 hover:border-primary/60 hover-glow animate-fade-in"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div className="mb-4">
                   <Icon className={`h-12 w-12 ${feature.colorClass}`} />
                 </div>
-                <h3 className={`text-2xl font-bebas mb-3 ${feature.colorClass}`}>
+                <h3 className={`text-2xl font-bebas mb-3 tracking-wide ${feature.colorClass}`}>
                   {feature.title}
                 </h3>
                 <p className="text-muted-foreground">

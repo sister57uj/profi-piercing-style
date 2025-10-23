@@ -30,11 +30,11 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas leading-tight glitch scan-line">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas leading-tight tracking-wider glitch">
             Пирсинг Профи
           </h1>
           
-          <div className="space-y-2">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
             <p className="text-3xl md:text-5xl font-bebas gradient-text-pink">
               Безопасно.
             </p>
@@ -73,15 +73,15 @@ const Hero = () => {
 
           {/* Trust indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 max-w-3xl mx-auto">
-            <div className="space-y-2 p-4 rounded-lg gradient-card-pink hover-glow scan-line backdrop-blur-sm">
+            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
               <div className="text-3xl font-bebas text-primary">2017</div>
               <div className="text-sm text-muted-foreground">Работаем с</div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg gradient-card-purple hover-glow scan-line backdrop-blur-sm">
+            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
               <div className="text-3xl font-bebas text-secondary">100%</div>
               <div className="text-sm text-muted-foreground">Стерильность</div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg gradient-card-cyan hover-glow scan-line backdrop-blur-sm">
+            <div className="space-y-2 p-6 rounded-lg bg-card/50 border border-primary/30 hover-glow backdrop-blur-sm">
               <div className="text-3xl font-bebas text-accent">НТВ</div>
               <div className="text-sm text-muted-foreground">Эксперты</div>
             </div>
