@@ -36,9 +36,9 @@ const Contacts = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero */}
             <div className="text-center mb-16 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bebas mb-6">
-                Контакты
-              </h1>
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              Контакты
+            </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Свяжитесь с нами удобным способом или приходите в студию
               </p>
@@ -48,7 +48,7 @@ const Contacts = () => {
               {/* Contact info */}
               <div className="space-y-8">
                 <div className="animate-fade-in">
-                  <h2 className="text-3xl font-bebas mb-6 neon-text-pink">
+                  <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
                     Информация
                   </h2>
                   
@@ -58,7 +58,7 @@ const Contacts = () => {
                         <MapPin className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-bebas text-lg mb-1">Адрес</h3>
+                        <h3 className="font-semibold text-lg mb-1">Адрес</h3>
                         <p className="text-muted-foreground">
                           ул. Рязанский проспект 30/15<br />
                           Москва, м. Окская
@@ -71,7 +71,7 @@ const Contacts = () => {
                         <Phone className="h-6 w-6 text-secondary" />
                       </div>
                       <div>
-                        <h3 className="font-bebas text-lg mb-1">Телефон</h3>
+                        <h3 className="font-semibold text-lg mb-1">Телефон</h3>
                         <p className="text-muted-foreground">
                           <a href="tel:+79858504801" className="hover:text-primary transition-colors">
                             +7 985 850-48-01
@@ -86,7 +86,7 @@ const Contacts = () => {
                         <Mail className="h-6 w-6 text-accent" />
                       </div>
                       <div>
-                        <h3 className="font-bebas text-lg mb-1">Email</h3>
+                        <h3 className="font-semibold text-lg mb-1">Email</h3>
                         <p className="text-muted-foreground">
                           <a href="mailto:Studio.p.t@yandex.ru" className="hover:text-primary transition-colors">
                             Studio.p.t@yandex.ru
@@ -103,7 +103,7 @@ const Contacts = () => {
                         <Clock className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-bebas text-lg mb-1">Часы работы</h3>
+                        <h3 className="font-semibold text-lg mb-1">Часы работы</h3>
                         <p className="text-muted-foreground">
                           Понедельник — Воскресенье<br />
                           12:00 — 21:00<br />
@@ -116,7 +116,7 @@ const Contacts = () => {
 
                 {/* Social */}
                 <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                  <h3 className="font-bebas text-lg mb-4">Мы в соцсетях</h3>
+                  <h3 className="font-semibold text-lg mb-4">Мы в соцсетях</h3>
                   <div className="flex gap-4">
                     <a
                       href="https://instagram.com"
@@ -148,7 +148,7 @@ const Contacts = () => {
 
               {/* Contact form */}
               <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <h2 className="text-3xl font-bebas mb-6 neon-text-purple">
+                <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
                   Напишите нам
                 </h2>
                 <div className="bg-card p-8 rounded-lg border border-border">
@@ -209,7 +209,7 @@ const Contacts = () => {
 
             {/* Map */}
             <div className="animate-fade-in">
-              <h2 className="text-3xl font-bebas mb-6 text-center">
+              <h2 className="text-3xl font-display font-semibold mb-6 text-center">
                 Как нас найти
               </h2>
               <div className="bg-card p-4 rounded-lg border border-border">

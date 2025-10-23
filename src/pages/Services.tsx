@@ -75,9 +75,9 @@ const Services = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero */}
             <div className="text-center mb-16 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bebas mb-6">
-                Наши услуги
-              </h1>
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              Наши услуги
+            </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Профессиональный пирсинг любой сложности с соблюдением всех стандартов безопасности
               </p>
@@ -90,7 +90,7 @@ const Services = () => {
                 className="mb-12 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <h2 className="text-3xl font-bebas mb-6 neon-text-pink">
+                <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
                   {category.category}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,7 +99,7 @@ const Services = () => {
                       key={item.name}
                       className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow"
                     >
-                      <h3 className="text-xl font-bebas mb-2">{item.name}</h3>
+                      <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
                       <p className="text-muted-foreground">{item.description}</p>
                     </div>
                   ))}
@@ -109,7 +109,7 @@ const Services = () => {
 
             {/* Process */}
             <div className="mt-20 mb-16">
-              <h2 className="text-4xl font-bebas mb-12 text-center">
+              <h2 className="text-4xl font-display font-bold mb-12 text-center">
                 Процесс работы
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -120,9 +120,9 @@ const Services = () => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-bebas text-primary">{index + 1}</span>
+                      <span className="text-2xl font-semibold text-primary">{index + 1}</span>
                     </div>
-                    <h3 className="text-lg font-bebas mb-2">{step.title}</h3>
+                    <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
                     <p className="text-sm text-muted-foreground">{step.description}</p>
                   </div>
                 ))}
@@ -131,7 +131,7 @@ const Services = () => {
 
             {/* Гарантии безопасности */}
             <div className="bg-card p-8 rounded-lg border border-primary/20 mb-12">
-              <h2 className="text-3xl font-bebas mb-6 neon-text-pink text-center">
+              <h2 className="text-3xl font-display font-semibold mb-6 text-primary text-center">
                 Гарантии безопасности
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -156,7 +156,7 @@ const Services = () => {
 
             {/* CTA */}
             <div className="text-center animate-fade-in">
-              <h3 className="text-2xl font-bebas mb-4">
+              <h3 className="text-2xl font-semibold mb-4">
                 Готовы записаться?
               </h3>
               <p className="text-muted-foreground mb-6">

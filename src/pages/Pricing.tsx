@@ -61,9 +61,9 @@ const Pricing = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero */}
             <div className="text-center mb-16 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bebas mb-6">
-                Прайс-лист
-              </h1>
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              Прайс-лист
+            </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Прозрачные цены на все виды пирсинга. Стоимость указана без учета украшений
               </p>
@@ -93,7 +93,7 @@ const Pricing = () => {
                   className="animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <h2 className="text-3xl font-bebas mb-6 neon-text-pink">
+                  <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
                     {category.category}
                   </h2>
                   <div className="bg-card rounded-lg border border-border overflow-hidden">
@@ -104,7 +104,7 @@ const Pricing = () => {
                           className="flex justify-between items-center p-4 hover:bg-background transition-colors"
                         >
                           <span className="font-medium">{item.name}</span>
-                          <span className="text-lg font-bebas neon-text-cyan">
+                          <span className="text-lg font-semibold text-primary">
                             {item.price === 0 ? 'Бесплатно' : `${item.price} ₽`}
                           </span>
                         </div>
@@ -117,29 +117,29 @@ const Pricing = () => {
 
             {/* Jewelry info */}
             <div className="mt-16 mb-12">
-              <h2 className="text-3xl font-bebas mb-6 text-center">
+              <h2 className="text-3xl font-display font-semibold mb-6 text-center">
                 Украшения
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-bebas mb-3 neon-text-pink">Базовые</h3>
-                  <p className="text-3xl font-bebas mb-2">от 500 ₽</p>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Базовые</h3>
+                  <p className="text-3xl font-semibold mb-2">от 500 ₽</p>
                   <p className="text-sm text-muted-foreground">
                     Качественная хирургическая сталь, титан
                   </p>
                 </div>
                 
                 <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-bebas mb-3 neon-text-purple">Премиум</h3>
-                  <p className="text-3xl font-bebas mb-2">от 1500 ₽</p>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Премиум</h3>
+                  <p className="text-3xl font-semibold mb-2">от 1500 ₽</p>
                   <p className="text-sm text-muted-foreground">
                     Золото, серебро, биофлекс, с камнями
                   </p>
                 </div>
                 
                 <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-bebas mb-3 neon-text-cyan">Эксклюзив</h3>
-                  <p className="text-3xl font-bebas mb-2">от 3000 ₽</p>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Эксклюзив</h3>
+                  <p className="text-3xl font-semibold mb-2">от 3000 ₽</p>
                   <p className="text-sm text-muted-foreground">
                     Дизайнерские украшения, драгоценные камни
                   </p>
@@ -149,7 +149,7 @@ const Pricing = () => {
 
             {/* Promotions reminder */}
             <div className="bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 p-8 rounded-lg border border-primary/30 text-center mb-12">
-              <h3 className="text-2xl font-bebas mb-4">Следите за акциями!</h3>
+              <h3 className="text-2xl font-semibold mb-4">Следите за акциями!</h3>
               <p className="text-muted-foreground mb-6">
                 Регулярно проводим специальные предложения и ищем моделей для портфолио со скидками до 50%
               </p>
@@ -166,7 +166,7 @@ const Pricing = () => {
 
             {/* CTA */}
             <div className="text-center animate-fade-in">
-              <h3 className="text-2xl font-bebas mb-4">
+              <h3 className="text-2xl font-semibold mb-4">
                 Остались вопросы по ценам?
               </h3>
               <p className="text-muted-foreground mb-6">

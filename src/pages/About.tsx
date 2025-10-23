@@ -11,9 +11,9 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             {/* Hero section */}
             <div className="text-center mb-16 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bebas mb-6">
-                О студии
-              </h1>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              О студии
+            </h2>
               <p className="text-xl text-muted-foreground">
                 История, ценности и команда «Пирсинг Профи»
               </p>
@@ -22,7 +22,7 @@ const About = () => {
             {/* История */}
             <div className="mb-16 animate-fade-in">
               <div className="bg-card p-8 rounded-lg border border-border">
-                <h2 className="text-3xl font-bebas mb-4 neon-text-pink">
+                <h2 className="text-3xl font-display font-semibold mb-4 text-primary">
                   Наша история
                 </h2>
                 <div className="space-y-4 text-muted-foreground">
@@ -46,13 +46,13 @@ const About = () => {
 
             {/* Ценности */}
             <div className="mb-16">
-              <h2 className="text-3xl font-bebas mb-8 text-center">
+              <h2 className="text-3xl font-display font-semibold mb-8 text-center">
                 Наши ценности
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in">
                   <Shield className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bebas mb-3 neon-text-pink">Безопасность</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Безопасность</h3>
                   <p className="text-muted-foreground">
                     Химическая и термическая стерилизация всех инструментов. 
                     Одноразовые иглы и перчатки, которые мы вскрываем при вас.
@@ -61,7 +61,7 @@ const About = () => {
 
                 <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.1s" }}>
                   <Award className="h-10 w-10 text-secondary mb-4" />
-                  <h3 className="text-xl font-bebas mb-3 neon-text-purple">Профессионализм</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Профессионализм</h3>
                   <p className="text-muted-foreground">
                     Мастера с медицинским образованием и сертификацией. 
                     Постоянное обучение и следование мировым стандартам.
@@ -70,7 +70,7 @@ const About = () => {
 
                 <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.2s" }}>
                   <Heart className="h-10 w-10 text-accent mb-4" />
-                  <h3 className="text-xl font-bebas mb-3 neon-text-cyan">Индивидуальность</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Индивидуальность</h3>
                   <p className="text-muted-foreground">
                     Мы подбираем украшения и расположение пирсинга индивидуально, 
                     учитывая анатомию и пожелания каждого клиента.
@@ -79,7 +79,7 @@ const About = () => {
 
                 <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.3s" }}>
                   <TrendingUp className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bebas mb-3">Развитие</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">Развитие</h3>
                   <p className="text-muted-foreground">
                     Мы следим за трендами, внедряем новые техники и регулярно 
                     повышаем квалификацию для лучшего обслуживания клиентов.
@@ -91,11 +91,11 @@ const About = () => {
             {/* О мастере */}
             <div className="mb-16 animate-fade-in">
               <div className="bg-card p-8 rounded-lg border border-primary/20">
-                <h2 className="text-3xl font-bebas mb-6 neon-text-pink">
+                <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
                   О мастере
                 </h2>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bebas">Екатерина Васина</h3>
+                  <h3 className="text-2xl font-semibold">Екатерина Васина</h3>
                   <p className="text-muted-foreground">
                     Эксперт по пирсингу с медицинским образованием. Екатерина работает в сфере 
                     пирсинга с 2017 года и за это время выполнила тысячи успешных процедур.
@@ -120,8 +120,8 @@ const About = () => {
 
             {/* Признание */}
             <div className="text-center animate-fade-in">
-              <div className="inline-block bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 p-8 rounded-lg border border-primary/30">
-                <p className="text-2xl font-bebas mb-2">НТВ «Чудо техники» 2018</p>
+              <div className="inline-block bg-primary/10 p-8 rounded-lg border border-primary/30">
+                <p className="text-2xl font-semibold mb-2">НТВ «Чудо техники» 2018</p>
                 <p className="text-muted-foreground">
                   Наша студия была представлена как образец профессионального подхода к пирсингу в России
                 </p>
