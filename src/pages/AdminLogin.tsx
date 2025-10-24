@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,8 +7,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 
+// ВНИМАНИЕ: Хранение учетных данных в коде небезопасно!
+// Это временное решение. Для продакшена используйте backend авторизацию.
+const ADMIN_CREDENTIALS = {
+  username: "adminprof",
+  // Хеш пароля bJV5P/nPq3B0eHCRMUo[my)0+RKxCj
+  passwordHash: "bJV5P/nPq3B0eHCRMUo[my)0+RKxCj"
+};
+
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -17,23 +24,10 @@ const AdminLogin = () => {
 
   useEffect(() => {
     // Проверка, если пользователь уже авторизован
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        // Проверка роли админа
-        const { data: roles } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .eq('role', 'admin')
-          .single();
-
-        if (roles) {
-          navigate('/admin-panel');
-        }
-      }
-    };
-    checkUser();
+    const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+    if (isLoggedIn === 'true') {
+      navigate('/admin-panel');
+    }
   }, [navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -41,44 +35,26 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      // Попытка входа
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (authError) throw authError;
-
-      if (authData.user) {
-        // Проверка роли админа
-        const { data: roles, error: roleError } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', authData.user.id)
-          .eq('role', 'admin')
-          .single();
-
-        if (roleError || !roles) {
-          await supabase.auth.signOut();
-          toast({
-            variant: "destructive",
-            title: "Доступ запрещен",
-            description: "У вас нет прав администратора",
-          });
-          return;
-        }
-
+      // Простая проверка учетных данных
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.passwordHash) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
         toast({
           title: "Успешный вход",
           description: "Добро пожаловать в админ-панель",
         });
         navigate('/admin-panel');
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Ошибка входа",
+          description: "Неверный логин или пароль",
+        });
       }
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Ошибка входа",
-        description: error.message || "Неверный email или пароль",
+        title: "Ошибка",
+        description: "Произошла ошибка при входе",
       });
     } finally {
       setLoading(false);
@@ -102,15 +78,16 @@ const AdminLogin = () => {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="username">Логин</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="admin@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username"
+                type="text"
+                placeholder="логин"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 disabled={loading}
+                autoComplete="username"
               />
             </div>
             <div className="space-y-2">
@@ -123,6 +100,7 @@ const AdminLogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={loading}
+                autoComplete="current-password"
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>

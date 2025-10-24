@@ -45,24 +45,44 @@ const ContactSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {contactInfo.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="bg-background p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow animate-fade-in text-center"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <Icon className={`h-8 w-8 ${item.color} mx-auto mb-4`} />
-                  <h3 className="font-bebas text-xl mb-2">{item.title}</h3>
-                  <p className="text-foreground mb-1">{item.content}</p>
-                  {item.subContent && (
-                    <p className="text-sm text-muted-foreground">{item.subContent}</p>
-                  )}
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            {/* Контактная информация */}
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {contactInfo.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.title}
+                      className="bg-background p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow animate-fade-in text-center"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <Icon className={`h-8 w-8 ${item.color} mx-auto mb-4`} />
+                      <h3 className="font-bebas text-xl mb-2">{item.title}</h3>
+                      <p className="text-foreground mb-1">{item.content}</p>
+                      {item.subContent && (
+                        <p className="text-sm text-muted-foreground">{item.subContent}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Форма записи Dikidi */}
+            <div className="bg-background p-6 rounded-lg border border-border animate-fade-in">
+              <h3 className="font-bebas text-2xl mb-4 text-center">Онлайн запись</h3>
+              <div className="aspect-[9/16] w-full rounded-lg overflow-hidden">
+                <iframe
+                  src="https://dikidi.net/1196602"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  className="w-full h-full"
+                  title="Форма онлайн записи Dikidi"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Map */}
