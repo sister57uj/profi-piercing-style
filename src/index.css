@@ -49,7 +49,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
-    background-image: url('/src/assets/piercing-background.png');
+    background-image: url('/src/assets/piercing-background-dark.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
