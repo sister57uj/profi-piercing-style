@@ -17,6 +17,7 @@ import rookPiercing from "@/assets/rook-piercing.jpg";
 import navelPiercing from "@/assets/navel-piercing.jpg";
 import microdermalPiercing from "@/assets/microdermal-new.jpg";
 import nipplePiercing from "@/assets/nipple-piercing.jpg";
+import intimatePiercing from "@/assets/intimate-piercing.jpg";
 
 const Portfolio = () => {
   const works = [
@@ -36,7 +37,8 @@ const Portfolio = () => {
     { title: "Рук", category: "Ухо", image: rookPiercing },
     { title: "Пупок", category: "Тело", image: navelPiercing },
     { title: "Микродермалы", category: "Тело", image: microdermalPiercing },
-    { title: "Соски", category: "Тело", image: nipplePiercing }
+    { title: "Соски", category: "Тело", image: nipplePiercing },
+    { title: "Интимный пирсинг", category: "Тело", image: intimatePiercing }
   ];
 
   return (
