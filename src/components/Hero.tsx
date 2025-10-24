@@ -29,10 +29,6 @@ const Hero = () => {
               Профессиональный
               <span className="block text-primary mt-3">Пирсинг</span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Стерильность, безопасность и красота в каждой процедуре
-            </p>
           </div>
           
           {/* Medical standards badges */}
@@ -68,24 +64,16 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="pt-8 flex justify-center">
             <Button 
               asChild 
               size="lg" 
               className="text-lg px-10 py-7 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-primary/25"
             >
               <a href="https://wa.me/79858504801">
-                Записаться на консультацию
+                Записаться
                 <ArrowRight className="ml-2" />
               </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-lg px-10 py-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold rounded-full transition-all"
-            >
-              <a href="#portfolio">Портфолио</a>
             </Button>
           </div>
         </div>

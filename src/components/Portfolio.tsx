@@ -47,7 +47,7 @@ const Portfolio = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Наши работы
+              Наши услуги
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Красивый пирсинг для каждого. Каждая работа — это уникальное сочетание 
@@ -82,23 +82,18 @@ const Portfolio = () => {
 
           <div className="text-center">
             <p className="text-muted-foreground mb-6">
-              Смотрите больше наших работ в Instagram
+              Смотрите больше наших работ в наших соц. сетях
             </p>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full"
+            <a
+              href="https://vk.com/piercing_prof"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground border-2 border-primary transition-all hover:scale-110"
             >
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="mr-2 h-5 w-5" />
-                Посмотреть портфолио
-              </a>
-            </Button>
+              <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.11 14.75h-1.41c-.46 0-.6-.36-1.42-1.18-.72-.72-1.03-.81-1.21-.81-.25 0-.32.07-.32.41v1.08c0 .29-.09.46-1.12.46-1.52 0-3.21-.92-4.39-2.64-1.77-2.52-2.26-4.41-2.26-4.8 0-.18.07-.35.41-.35h1.41c.31 0 .42.14.54.47.61 1.75 1.63 3.29 2.05 3.29.16 0 .23-.07.23-.48v-1.87c-.05-.87-.51-1-.51-1.33 0-.14.12-.28.31-.28h2.22c.26 0 .35.13.35.44v2.53c0 .26.11.35.19.35.16 0 .28-.09.57-.38 1.07-1.16 1.84-2.92 1.84-2.92.1-.2.24-.35.55-.35h1.41c.34 0 .42.17.34.44-.16.72-.75 1.75-1.43 2.71-.29.41-.39.61 0 1.07.29.35.79.76 1.19 1.21.7.7 1.23 1.28 1.38 1.69.14.41-.08.61-.49.61z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

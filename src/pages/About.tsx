@@ -9,14 +9,32 @@ const About = () => {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            {/* Hero section */}
-            <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              О студии
-            </h2>
-              <p className="text-xl text-muted-foreground">
-                История, ценности и команда «Пирсинг Профи»
-              </p>
+            {/* Наши сотрудники */}
+            <div className="mb-16 animate-fade-in">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
+                Наши сотрудники
+              </h2>
+              <div className="bg-card p-8 rounded-lg border border-primary/20 max-w-3xl mx-auto">
+                <h3 className="text-2xl font-semibold mb-4 text-primary">Екатерина Васина</h3>
+                <p className="text-muted-foreground mb-4">
+                  Эксперт по пирсингу с медицинским образованием. Екатерина работает в сфере 
+                  пирсинга с 2017 года и за это время выполнила тысячи успешных процедур.
+                </p>
+                <p className="text-muted-foreground mb-4">
+                  Она специализируется на всех видах пирсинга — от классического крыла носа 
+                  до сложных проектов как индастриал и микродермалы. Екатерина подходит к 
+                  каждому клиенту индивидуально, помогая воплотить любые идеи с учетом 
+                  анатомических особенностей.
+                </p>
+                <div className="pt-4 border-t border-border space-y-2">
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">Образование:</strong> Медицинское образование, сертификация по пирсингу
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">Опыт:</strong> Более 7 лет в индустрии пирсинга
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* История */}
@@ -84,36 +102,6 @@ const About = () => {
                     Мы следим за трендами, внедряем новые техники и регулярно 
                     повышаем квалификацию для лучшего обслуживания клиентов.
                   </p>
-                </div>
-              </div>
-            </div>
-
-            {/* О мастере */}
-            <div className="mb-16 animate-fade-in">
-              <div className="bg-card p-8 rounded-lg border border-primary/20">
-                <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
-                  О мастере
-                </h2>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold">Екатерина Васина</h3>
-                  <p className="text-muted-foreground">
-                    Эксперт по пирсингу с медицинским образованием. Екатерина работает в сфере 
-                    пирсинга с 2017 года и за это время выполнила тысячи успешных процедур.
-                  </p>
-                  <p className="text-muted-foreground">
-                    Она специализируется на всех видах пирсинга — от классического крыла носа 
-                    до сложных проектов как индастриал и микродермалы. Екатерина подходит к 
-                    каждому клиенту индивидуально, помогая воплотить любые идеи с учетом 
-                    анатомических особенностей.
-                  </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-sm text-muted-foreground">
-                      <strong className="text-foreground">Образование:</strong> Медицинское образование, сертификация по пирсингу
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      <strong className="text-foreground">Опыт:</strong> Более 7 лет в индустрии пирсинга
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
