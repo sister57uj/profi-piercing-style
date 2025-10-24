@@ -3,6 +3,7 @@ import logo from "@/assets/logo.jpg";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
 import vkIcon from "@/assets/vk-icon.png";
+import adminIcon from "@/assets/admin-icon.png";
 
 const Footer = () => {
   return (
@@ -107,7 +108,12 @@ const Footer = () => {
 
           {/* Bottom */}
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2025 Пирсинг Профи. Все права защищены.</p>
+            <p className="flex items-center justify-center gap-2">
+              <Link to="/admin-login" className="opacity-20 hover:opacity-40 transition-opacity">
+                <img src={adminIcon} alt="" className="h-4 w-4" />
+              </Link>
+              © 2025 Пирсинг Профи. Все права защищены.
+            </p>
           </div>
         </div>
       </div>

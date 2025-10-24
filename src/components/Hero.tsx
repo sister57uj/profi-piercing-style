@@ -41,8 +41,8 @@ const Hero = () => {
               <p className="text-primary text-sm font-medium tracking-wide">МЕДИЦИНСКИЙ ПОДХОД К ПИРСИНГУ</p>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-[1.1]">
-              Профессиональный
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-[1.1] break-words">
+              <span className="inline-block">Профессиональный</span>
               <span className="block text-primary mt-3">Пирсинг</span>
             </h1>
           </div>
