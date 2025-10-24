@@ -1,10 +1,22 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Pricing = () => {
+  const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
+  const [promotionsDialogOpen, setPromotionsDialogOpen] = useState(false);
+
   const prices = [
     {
       category: "Пирсинг носа",
@@ -154,15 +166,24 @@ const Pricing = () => {
               <p className="text-muted-foreground mb-6">
                 Регулярно проводим специальные предложения и ищем моделей для портфолио со скидками до 50%
               </p>
-              <Button
-                asChild
-                variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                <a href="/#promotions">
-                  Посмотреть акции
-                </a>
-              </Button>
+              <Dialog open={promotionsDialogOpen} onOpenChange={setPromotionsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Посмотреть акции
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Акции временно отсутствуют</DialogTitle>
+                    <DialogDescription>
+                      В данный момент активных акций нет. Следите за обновлениями в наших социальных сетях или свяжитесь с нами для получения актуальной информации.
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </div>
 
             {/* CTA */}
@@ -179,20 +200,31 @@ const Pricing = () => {
                   size="lg"
                   className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
                 >
-                  <a href="https://wa.me/79858504801">
+                  <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
                     Записаться
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                >
-                  <a href="tel:+79858504801">
-                    Позвонить
-                  </a>
-                </Button>
+                <Dialog open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
+                      Позвонить
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Позвоните нам</DialogTitle>
+                      <DialogDescription className="text-2xl font-semibold text-foreground pt-4">
+                        <a href="tel:+79858504801" className="hover:text-primary transition-colors">
+                          +7 (985) 850-48-01
+                        </a>
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
