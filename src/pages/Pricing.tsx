@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AdminHelper } from "@/components/admin/AdminHelper";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 
@@ -198,6 +199,7 @@ const Pricing = () => {
         </div>
       </main>
       <Footer />
+      <AdminHelper />
     </div>
   );
 };

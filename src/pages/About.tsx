@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AdminHelper } from "@/components/admin/AdminHelper";
 import { Award, Heart, Shield, TrendingUp, CheckCircle } from "lucide-react";
 import ekaterina from "@/assets/ekaterina-vasina.jpg";
 
@@ -194,6 +195,7 @@ const About = () => {
         </div>
       </main>
       <Footer />
+      <AdminHelper />
     </div>
   );
 };

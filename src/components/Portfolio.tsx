@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { EditableText } from "@/components/admin/EditableText";
+import { PortfolioManager } from "@/components/admin/PortfolioManager";
 import nostrilPiercing from "@/assets/nostril-piercing.jpg";
 import septumPiercing from "@/assets/septum-piercing.jpg";
 import nasallangPiercing from "@/assets/nasallang-piercing.jpg";
@@ -18,40 +21,61 @@ import nipplePiercing from "@/assets/nipple-piercing.jpg";
 import intimatePiercing from "@/assets/intimate-piercing.jpg";
 
 const Portfolio = () => {
-  const works = [
-    { title: "Крыло носа", category: "Нос", image: nostrilPiercing },
-    { title: "Септум", category: "Нос", image: septumPiercing },
-    { title: "Nasallang", category: "Нос", image: nasallangPiercing },
-    { title: "Бридж", category: "Лицо", image: bridgePiercing },
-    { title: "Бровь", category: "Лицо", image: eyebrowPiercing },
-    { title: "Anti-eyebrow", category: "Лицо", image: antiEyebrowPiercing },
-    { title: "Губа", category: "Лицо", image: lipPiercing },
-    { title: "Щека", category: "Лицо", image: cheekPiercing },
-    { title: "Мочка уха", category: "Ухо", image: lobePiercing },
-    { title: "Хеликс", category: "Ухо", image: helixPiercing },
-    { title: "Индастриал", category: "Ухо", image: industrialPiercing },
-    { title: "Трагус", category: "Ухо", image: tragusPiercing },
-    { title: "Дэйс", category: "Ухо", image: daithPiercing },
-    { title: "Рук", category: "Ухо", image: rookPiercing },
-    { title: "Пупок", category: "Тело", image: navelPiercing },
-    { title: "Микродермалы", category: "Тело", image: microdermalPiercing },
-    { title: "Соски", category: "Тело", image: nipplePiercing },
-    { title: "Интимный пирсинг", category: "Тело", image: intimatePiercing }
+  const [portfolioTitle, setPortfolioTitle] = useState("Наши услуги");
+  const [portfolioDescription, setPortfolioDescription] = useState(
+    "Красивый пирсинг для каждого. Каждая работа — это уникальное сочетание профессионализма, безопасности и эстетики."
+  );
+
+  const initialWorks = [
+    { id: "1", title: "Крыло носа", category: "Нос", image: nostrilPiercing },
+    { id: "2", title: "Септум", category: "Нос", image: septumPiercing },
+    { id: "3", title: "Nasallang", category: "Нос", image: nasallangPiercing },
+    { id: "4", title: "Бридж", category: "Лицо", image: bridgePiercing },
+    { id: "5", title: "Бровь", category: "Лицо", image: eyebrowPiercing },
+    { id: "6", title: "Anti-eyebrow", category: "Лицо", image: antiEyebrowPiercing },
+    { id: "7", title: "Губа", category: "Лицо", image: lipPiercing },
+    { id: "8", title: "Щека", category: "Лицо", image: cheekPiercing },
+    { id: "9", title: "Мочка уха", category: "Ухо", image: lobePiercing },
+    { id: "10", title: "Хеликс", category: "Ухо", image: helixPiercing },
+    { id: "11", title: "Индастриал", category: "Ухо", image: industrialPiercing },
+    { id: "12", title: "Трагус", category: "Ухо", image: tragusPiercing },
+    { id: "13", title: "Дэйс", category: "Ухо", image: daithPiercing },
+    { id: "14", title: "Рук", category: "Ухо", image: rookPiercing },
+    { id: "15", title: "Пупок", category: "Тело", image: navelPiercing },
+    { id: "16", title: "Микродермалы", category: "Тело", image: microdermalPiercing },
+    { id: "17", title: "Соски", category: "Тело", image: nipplePiercing },
+    { id: "18", title: "Интимный пирсинг", category: "Тело", image: intimatePiercing }
   ];
+
+  const [works, setWorks] = useState(initialWorks);
 
   return (
     <section className="py-20 relative overflow-hidden" id="portfolio">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Наши услуги
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Красивый пирсинг для каждого. Каждая работа — это уникальное сочетание 
-              профессионализма, безопасности и эстетики.
-            </p>
+            <EditableText
+              initialValue={portfolioTitle}
+              onSave={setPortfolioTitle}
+              page="home"
+              section="portfolio"
+              contentKey="title"
+              as="h2"
+              className="text-4xl md:text-5xl font-display font-bold mb-4"
+            />
+            <EditableText
+              initialValue={portfolioDescription}
+              onSave={setPortfolioDescription}
+              page="home"
+              section="portfolio"
+              contentKey="description"
+              multiline
+              as="p"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            />
           </div>
+
+          <PortfolioManager items={works} onUpdate={setWorks} />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {works.map((work, index) => (

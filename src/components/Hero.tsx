@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { EditableText } from "@/components/admin/EditableText";
 
 const Hero = () => {
+  const [tagline, setTagline] = useState("МЕДИЦИНСКИЙ ПОДХОД К ПИРСИНГУ");
+  const [title, setTitle] = useState("Профессиональный");
+  const [subtitle, setSubtitle] = useState("Пирсинг");
 
   return (
     <section 
@@ -12,12 +17,36 @@ const Hero = () => {
         <div className="max-w-5xl mx-auto text-center space-y-12 animate-fade-in py-20">
           <div className="space-y-6">
             <div className="inline-block px-5 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <p className="text-primary text-sm font-medium tracking-wide">МЕДИЦИНСКИЙ ПОДХОД К ПИРСИНГУ</p>
+              <EditableText
+                initialValue={tagline}
+                onSave={setTagline}
+                page="home"
+                section="hero"
+                contentKey="tagline"
+                as="p"
+                className="text-primary text-sm font-medium tracking-wide"
+              />
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-[1.1] break-words">
-              <span className="inline-block">Профессиональный</span>
-              <span className="block text-primary mt-3">Пирсинг</span>
+              <EditableText
+                initialValue={title}
+                onSave={setTitle}
+                page="home"
+                section="hero"
+                contentKey="title"
+                as="span"
+                className="inline-block"
+              />
+              <EditableText
+                initialValue={subtitle}
+                onSave={setSubtitle}
+                page="home"
+                section="hero"
+                contentKey="subtitle"
+                as="span"
+                className="block text-primary mt-3"
+              />
             </h1>
           </div>
           

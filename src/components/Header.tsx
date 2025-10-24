@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, LogOut, Shield } from "lucide-react";
+import { useAdmin } from "@/contexts/AdminContext";
+import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.jpg";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
@@ -12,6 +14,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPhoneDialog, setShowPhoneDialog] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { isAdmin, checkAdmin } = useAdmin();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: "Главная", path: "/" },
@@ -38,6 +43,16 @@ const Header = () => {
       e.preventDefault();
       setShowPhoneDialog(true);
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminLoggedIn');
+    checkAdmin();
+    toast({
+      title: "Выход выполнен",
+      description: "Вы вышли из режима администратора"
+    });
+    navigate('/');
   };
 
   return (
@@ -67,6 +82,20 @@ const Header = () => {
 
           {/* Social Links & CTA */}
           <div className="hidden md:flex items-center gap-4">
+            {isAdmin && (
+              <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded-full">
+                <Shield className="h-4 w-4 text-primary" />
+                <span className="text-sm text-primary font-medium">Режим админа</span>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={handleLogout}
+                  className="h-6 px-2"
+                >
+                  <LogOut className="h-3 w-3" />
+                </Button>
+              </div>
+            )}
             <a
               href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
               target="_blank"

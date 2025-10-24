@@ -1,6 +1,13 @@
 import { Shield, Award, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { EditableText } from "./admin/EditableText";
 
 const AboutSection = () => {
+  const [aboutTitle, setAboutTitle] = useState("О студии");
+  const [aboutDescription, setAboutDescription] = useState(
+    "С 2017 года «Пирсинг Профи» создает безопасный и стильный пирсинг. Наши мастера с медицинским образованием и сертификацией работают с одноразовыми инструментами, вскрывая упаковки при вас."
+  );
+
   const features = [
     {
       icon: Shield,
@@ -30,14 +37,25 @@ const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bebas mb-4">
-              О студии
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              С 2017 года «Пирсинг Профи» создает безопасный и стильный пирсинг. 
-              Наши мастера с медицинским образованием и сертификацией работают с 
-              одноразовыми инструментами, вскрывая упаковки при вас.
-            </p>
+            <EditableText
+              initialValue={aboutTitle}
+              onSave={setAboutTitle}
+              page="about"
+              section="about"
+              contentKey="title"
+              as="h2"
+              className="text-4xl md:text-5xl font-bebas mb-4"
+            />
+            <EditableText
+              initialValue={aboutDescription}
+              onSave={setAboutDescription}
+              page="about"
+              section="about"
+              contentKey="description"
+              multiline
+              as="p"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

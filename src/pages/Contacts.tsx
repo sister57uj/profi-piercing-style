@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AdminHelper } from "@/components/admin/AdminHelper";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -173,6 +174,7 @@ const Contacts = () => {
         </div>
       </main>
       <Footer />
+      <AdminHelper />
 
       {/* Phone Dialog for Desktop */}
       <Dialog open={showPhoneDialog} onOpenChange={setShowPhoneDialog}>
