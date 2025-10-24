@@ -10,7 +10,6 @@ const Header = () => {
   const navItems = [
     { name: "Главная", path: "/" },
     { name: "О нас", path: "/about" },
-    { name: "Услуги", path: "/services" },
     { name: "Прайс", path: "/pricing" },
     { name: "Контакты", path: "/contacts" },
   ];

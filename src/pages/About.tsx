@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Award, Heart, Shield, TrendingUp } from "lucide-react";
+import { Award, Heart, Shield, TrendingUp, CheckCircle } from "lucide-react";
 import ekaterina from "@/assets/ekaterina-vasina.jpg";
 
 const About = () => {
@@ -100,7 +100,7 @@ const About = () => {
                 </div>
 
                 <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                  <Award className="h-10 w-10 text-secondary mb-4" />
+                  <Award className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-xl font-semibold mb-3 text-primary">Профессионализм</h3>
                   <p className="text-muted-foreground">
                     Мастера с медицинским образованием и сертификацией. 
@@ -125,6 +125,59 @@ const About = () => {
                     повышаем квалификацию для лучшего обслуживания клиентов.
                   </p>
                 </div>
+              </div>
+            </div>
+
+            {/* Процесс работы */}
+            <div className="mb-16">
+              <h2 className="text-4xl font-display font-bold mb-12 text-center">
+                Процесс работы
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                {[
+                  { title: "Консультация", description: "Обсуждаем ваши пожелания, подбираем украшение, рассказываем о процессе" },
+                  { title: "Подготовка", description: "Дезинфекция зоны, разметка, подготовка стерильных инструментов" },
+                  { title: "Прокол", description: "Быстрая и точная процедура с одноразовой иглой, вскрытой при вас" },
+                  { title: "Установка украшения", description: "Установка выбранного украшения из гипоаллергенных материалов" },
+                  { title: "Рекомендации", description: "Подробные инструкции по уходу за пирсингом в период заживления" }
+                ].map((step, index) => (
+                  <div
+                    key={step.title}
+                    className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-semibold text-primary">{index + 1}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Гарантии безопасности */}
+            <div className="bg-card p-8 rounded-lg border border-primary/20 mb-16">
+              <h2 className="text-3xl font-display font-semibold mb-6 text-primary text-center">
+                Гарантии безопасности
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  "Химическая стерилизация всех многоразовых инструментов",
+                  "Термическая обработка в сухожаровом шкафу",
+                  "Одноразовые иглы, вскрываемые при клиенте",
+                  "Одноразовые перчатки для каждой процедуры",
+                  "Гипоаллергенные материалы украшений",
+                  "Подробные инструкции по уходу"
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3"
+                  >
+                    <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                    <p className="text-muted-foreground">{item}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
