@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Instagram, Send, User } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Menu, X, Instagram, Send } from "lucide-react";
+import { SiVk } from "react-icons/si";
 import logo from "@/assets/logo.jpg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showPhoneDialog, setShowPhoneDialog] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const navItems = [
     { name: "Главная", path: "/" },
@@ -14,9 +18,23 @@ const Header = () => {
     { name: "Контакты", path: "/contacts" },
   ];
 
+  useEffect(() => {
+    const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    setIsMobile(checkMobile);
+  }, []);
+
   const handleLogoClick = (e: React.MouseEvent) => {
     if (e.ctrlKey && e.shiftKey) {
       window.location.href = "/profi-admin-2025";
+    }
+  };
+
+  const handleCallClick = (e: React.MouseEvent) => {
+    if (!isMobile) {
+      e.preventDefault();
+      setShowPhoneDialog(true);
     }
   };
 
@@ -48,7 +66,7 @@ const Header = () => {
           {/* Social Links & CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:text-primary transition-colors"
@@ -56,7 +74,7 @@ const Header = () => {
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="https://t.me/+79858504801"
+              href="https://t.me/piercing_prof"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:text-primary transition-colors"
@@ -64,18 +82,18 @@ const Header = () => {
               <Send className="h-5 w-5" />
             </a>
             <a
-              href="https://vk.com"
+              href="https://vk.com/piercing_profi24"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:text-primary transition-colors"
             >
-              <User className="h-5 w-5" />
+              <SiVk className="h-5 w-5" />
             </a>
             <Button
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
             >
-              <a href="https://wa.me/79858504801">Записаться</a>
+              <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
             </Button>
           </div>
 
@@ -102,25 +120,42 @@ const Header = () => {
               </Link>
             ))}
             <div className="flex gap-4 pt-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://t.me/+79858504801" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/piercing_prof" target="_blank" rel="noopener noreferrer">
                 <Send className="h-5 w-5" />
               </a>
-              <a href="https://vk.com" target="_blank" rel="noopener noreferrer">
-                <User className="h-5 w-5" />
+              <a href="https://vk.com/piercing_profi24" target="_blank" rel="noopener noreferrer">
+                <SiVk className="h-5 w-5" />
               </a>
             </div>
             <Button
               asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <a href="https://wa.me/79858504801">Записаться</a>
+              <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
             </Button>
           </div>
         )}
       </nav>
+
+      {/* Phone Dialog for Desktop */}
+      <Dialog open={showPhoneDialog} onOpenChange={setShowPhoneDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Позвоните нам</DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center justify-center p-6">
+            <a
+              href="tel:+79858504801"
+              className="text-2xl font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              +7 (985) 850-48-01
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };
