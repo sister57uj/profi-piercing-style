@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { Button } from "@/components/ui/button";
-import { Info } from "lucide-react";
+import { Info, Phone } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -169,8 +169,7 @@ const Pricing = () => {
               <Dialog open={promotionsDialogOpen} onOpenChange={setPromotionsDialogOpen}>
                 <DialogTrigger asChild>
                   <Button
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
                   >
                     Посмотреть акции
                   </Button>
@@ -207,10 +206,10 @@ const Pricing = () => {
                 <Dialog open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}>
                   <DialogTrigger asChild>
                     <Button
-                      variant="outline"
                       size="lg"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
                     >
+                      <Phone className="h-5 w-5" />
                       Позвонить
                     </Button>
                   </DialogTrigger>

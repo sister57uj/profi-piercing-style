@@ -126,7 +126,6 @@ const Header = () => {
             >
               <a href="tel:+79858504801" onClick={handleCallClick}>
                 Записаться
-                <Phone className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -185,7 +184,6 @@ const Header = () => {
             >
               <a href="tel:+79858504801" onClick={handleCallClick}>
                 Записаться
-                <Phone className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
