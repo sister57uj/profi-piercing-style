@@ -40,6 +40,14 @@ const ScrollingBackground = () => {
           WebkitMask: 'radial-gradient(ellipse 50% 50% at 50% 50%, black 0%, transparent 60%)',
         }}
       />
+      
+      {/* Слой затемнения по центру для читаемости текста */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0, 0, 0, 0.4) 0%, transparent 70%)',
+        }}
+      />
     </div>
   );
 };
