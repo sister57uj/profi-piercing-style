@@ -2,19 +2,41 @@ import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
 import nostrilPiercing from "@/assets/nostril-piercing.jpg";
 import septumPiercing from "@/assets/septum-piercing.jpg";
-import eyebrowPiercing from "@/assets/eyebrow-piercing.jpg";
-import industrialPiercing from "@/assets/industrial-piercing.jpg";
-import lipPiercing from "@/assets/lip-piercing.jpg";
-import microdermalPiercing from "@/assets/microdermal-piercing.jpg";
+import nasallangPiercing from "@/assets/nasallang-piercing.jpg";
+import bridgePiercing from "@/assets/bridge-piercing.jpg";
+import eyebrowPiercing from "@/assets/eyebrow-new.jpg";
+import antiEyebrowPiercing from "@/assets/anti-eyebrow-piercing.jpg";
+import lipPiercing from "@/assets/lip-new.jpg";
+import cheekPiercing from "@/assets/cheek-piercing.jpg";
+import lobePiercing from "@/assets/lobe-piercing.jpg";
+import helixPiercing from "@/assets/helix-piercing.jpg";
+import industrialPiercing from "@/assets/industrial-new.jpg";
+import tragusPiercing from "@/assets/tragus-piercing.jpg";
+import daithPiercing from "@/assets/daith-piercing.jpg";
+import rookPiercing from "@/assets/rook-piercing.jpg";
+import navelPiercing from "@/assets/navel-piercing.jpg";
+import microdermalPiercing from "@/assets/microdermal-new.jpg";
+import nipplePiercing from "@/assets/nipple-piercing.jpg";
 
 const Portfolio = () => {
   const works = [
     { title: "Крыло носа", category: "Нос", image: nostrilPiercing },
     { title: "Септум", category: "Нос", image: septumPiercing },
-    { title: "Пирсинг брови", category: "Лицо", image: eyebrowPiercing },
-    { title: "Индастриал", category: "Ухо", image: industrialPiercing },
+    { title: "Nasallang", category: "Нос", image: nasallangPiercing },
+    { title: "Бридж", category: "Лицо", image: bridgePiercing },
+    { title: "Бровь", category: "Лицо", image: eyebrowPiercing },
+    { title: "Anti-eyebrow", category: "Лицо", image: antiEyebrowPiercing },
     { title: "Губа", category: "Лицо", image: lipPiercing },
-    { title: "Микродермалы", category: "Тело", image: microdermalPiercing }
+    { title: "Щека", category: "Лицо", image: cheekPiercing },
+    { title: "Мочка уха", category: "Ухо", image: lobePiercing },
+    { title: "Хеликс", category: "Ухо", image: helixPiercing },
+    { title: "Индастриал", category: "Ухо", image: industrialPiercing },
+    { title: "Трагус", category: "Ухо", image: tragusPiercing },
+    { title: "Дэйс", category: "Ухо", image: daithPiercing },
+    { title: "Рук", category: "Ухо", image: rookPiercing },
+    { title: "Пупок", category: "Тело", image: navelPiercing },
+    { title: "Микродермалы", category: "Тело", image: microdermalPiercing },
+    { title: "Соски", category: "Тело", image: nipplePiercing }
   ];
 
   return (
