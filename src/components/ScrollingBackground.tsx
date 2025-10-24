@@ -1,3 +1,5 @@
+import bgImage from '@/assets/piercing-background-dark.png';
+
 const ScrollingBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -5,7 +7,7 @@ const ScrollingBackground = () => {
       <div
         className="absolute inset-0 bg-background"
         style={{
-          backgroundImage: "url('/src/assets/piercing-background-dark.png')",
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat',
@@ -17,7 +19,7 @@ const ScrollingBackground = () => {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('/src/assets/piercing-background-dark.png')",
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat',
@@ -31,7 +33,7 @@ const ScrollingBackground = () => {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('/src/assets/piercing-background-dark.png')",
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat',
