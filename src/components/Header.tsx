@@ -124,7 +124,7 @@ const Header = () => {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
             >
-              <a href="tel:+79858504801" onClick={handleCallClick}>
+              <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
                 Записаться
               </a>
             </Button>
@@ -182,7 +182,7 @@ const Header = () => {
               asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <a href="tel:+79858504801" onClick={handleCallClick}>
+              <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
                 Записаться
               </a>
             </Button>
