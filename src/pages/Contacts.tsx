@@ -1,34 +1,29 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { toast } from "sonner";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
 import vkIcon from "@/assets/vk-icon.png";
 
 const Contacts = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    message: ""
-  });
+  const [showPhoneDialog, setShowPhoneDialog] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const message = `Новое сообщение с сайта!\n\nИмя: ${formData.name}\nТелефон: ${formData.phone}\nСообщение: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/79858504801?text=${encodeURIComponent(message)}`;
-    
-    window.open(whatsappUrl, '_blank');
-    
-    toast.success("Перенаправляем в WhatsApp!");
-    
-    setFormData({ name: "", phone: "", message: "" });
+  useEffect(() => {
+    const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    setIsMobile(checkMobile);
+  }, []);
+
+  const handleCallClick = (e: React.MouseEvent) => {
+    if (!isMobile) {
+      e.preventDefault();
+      setShowPhoneDialog(true);
+    }
   };
 
   return (
@@ -43,7 +38,7 @@ const Contacts = () => {
               Контакты
             </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Свяжитесь с нами удобным способом или приходите в студию
+                Свяжитесь с нами удобным способом
               </p>
             </div>
 
@@ -149,64 +144,15 @@ const Contacts = () => {
                 </div>
               </div>
 
-              {/* Contact form */}
-              <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
-                  Напишите нам
-                </h2>
-                <div className="bg-card p-8 rounded-lg border border-border">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Ваше имя</Label>
-                      <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Введите ваше имя"
-                        required
-                        className="bg-background border-border focus:border-primary"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Телефон</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+7 (___) ___-__-__"
-                        required
-                        className="bg-background border-border focus:border-primary"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Сообщение</Label>
-                      <Textarea
-                        id="message"
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Расскажите, чем мы можем вам помочь"
-                        required
-                        rows={5}
-                        className="bg-background border-border focus:border-primary resize-none"
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
-                    >
-                      Отправить сообщение
-                    </Button>
-
-                    <p className="text-sm text-muted-foreground text-center">
-                      После отправки формы мы перенаправим вас в WhatsApp
-                    </p>
-                  </form>
-                </div>
+              {/* Call to Action */}
+              <div className="animate-fade-in flex items-center justify-center" style={{ animationDelay: "0.1s" }}>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-xl px-12 py-8 h-auto"
+                >
+                  <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
+                </Button>
               </div>
             </div>
 
@@ -238,6 +184,23 @@ const Contacts = () => {
         </div>
       </main>
       <Footer />
+
+      {/* Phone Dialog for Desktop */}
+      <Dialog open={showPhoneDialog} onOpenChange={setShowPhoneDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Позвоните нам</DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center justify-center p-6">
+            <a
+              href="tel:+79858504801"
+              className="text-2xl font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              +7 (985) 850-48-01
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
