@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, Instagram, Send, User } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Send } from "lucide-react";
+import { SiVk } from "react-icons/si";
 import { toast } from "sonner";
 
 const Contacts = () => {
@@ -67,8 +68,8 @@ const Contacts = () => {
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="h-12 w-12 rounded-lg bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                        <Phone className="h-6 w-6 text-secondary" />
+                      <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                        <Phone className="h-6 w-6 text-primary" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Телефон</h3>
@@ -119,28 +120,28 @@ const Contacts = () => {
                   <h3 className="font-semibold text-lg mb-4">Мы в соцсетях</h3>
                   <div className="flex gap-4">
                     <a
-                      href="https://instagram.com"
+                      href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
                     >
-                      <Instagram className="h-6 w-6" />
+                      <Instagram className="h-6 w-6 text-white" />
                     </a>
                     <a
-                      href="https://t.me/+79858504801"
+                      href="https://t.me/piercing_prof"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                      className="h-12 w-12 rounded-lg bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
                     >
-                      <Send className="h-6 w-6" />
+                      <Send className="h-6 w-6 text-white" />
                     </a>
                     <a
-                      href="https://vk.com"
+                      href="https://vk.com/piercing_profi24"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                      className="h-12 w-12 rounded-lg bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
                     >
-                      <User className="h-6 w-6" />
+                      <SiVk className="h-6 w-6 text-white" />
                     </a>
                   </div>
                 </div>
@@ -215,12 +216,12 @@ const Contacts = () => {
               <div className="bg-card p-4 rounded-lg border border-border">
                 <div className="aspect-video w-full rounded-lg overflow-hidden">
                   <iframe
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A9f4c5e8b4a5f3c2d1e0a9b8c7d6e5f4a&amp;source=constructor"
+                    src="https://yandex.ru/map-widget/v1/?ll=37.801917%2C55.705556&z=16&l=map&pt=37.801917,55.705556,pm2rdm"
                     width="100%"
                     height="100%"
                     frameBorder="0"
                     className="w-full h-full"
-                    title="Карта студии Пирсинг Профи"
+                    title="Карта студии Пирсинг Профи - Рязанский проспект 30/15"
                   />
                 </div>
               </div>

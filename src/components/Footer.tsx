@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Instagram, Send, User } from "lucide-react";
+import { Instagram, Send } from "lucide-react";
+import { SiVk } from "react-icons/si";
 import logo from "@/assets/logo.jpg";
 
 const Footer = () => {
@@ -76,28 +77,28 @@ const Footer = () => {
               <h3 className="font-bebas text-lg mb-4">Мы в соцсетях</h3>
               <div className="flex gap-4">
                 <a
-                  href="https://instagram.com"
+                  href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                  className="h-10 w-10 rounded-full bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <Instagram className="h-5 w-5 text-white" />
                 </a>
                 <a
-                  href="https://t.me/+79858504801"
+                  href="https://t.me/piercing_prof"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                  className="h-10 w-10 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
                 >
-                  <Send className="h-5 w-5" />
+                  <Send className="h-5 w-5 text-white" />
                 </a>
                 <a
-                  href="https://vk.com"
+                  href="https://vk.com/piercing_profi24"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary transition-all hover-glow"
+                  className="h-10 w-10 rounded-full bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
                 >
-                  <User className="h-5 w-5" />
+                  <SiVk className="h-5 w-5 text-white" />
                 </a>
               </div>
             </div>

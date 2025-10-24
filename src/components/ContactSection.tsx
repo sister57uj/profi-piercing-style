@@ -14,7 +14,7 @@ const ContactSection = () => {
       title: "Телефон",
       content: "+7 985 850-48-01",
       subContent: "WhatsApp / Telegram",
-      color: "text-secondary"
+      color: "text-primary"
     },
     {
       icon: Mail,
@@ -69,12 +69,12 @@ const ContactSection = () => {
           <div className="bg-background p-4 rounded-lg border border-border animate-fade-in">
             <div className="aspect-video w-full rounded-lg overflow-hidden">
               <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3A9f4c5e8b4a5f3c2d1e0a9b8c7d6e5f4a&amp;source=constructor"
+                src="https://yandex.ru/map-widget/v1/?ll=37.801917%2C55.705556&z=16&l=map&pt=37.801917,55.705556,pm2rdm"
                 width="100%"
                 height="100%"
                 frameBorder="0"
                 className="w-full h-full"
-                title="Карта студии Пирсинг Профи"
+                title="Карта студии Пирсинг Профи - Рязанский проспект 30/15"
               />
             </div>
           </div>

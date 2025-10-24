@@ -69,25 +69,25 @@ const Header = () => {
               href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors"
+              className="h-9 w-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
             >
-              <Instagram className="h-5 w-5" />
+              <Instagram className="h-4 w-4 text-white" />
             </a>
             <a
               href="https://t.me/piercing_prof"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors"
+              className="h-9 w-9 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
             >
-              <Send className="h-5 w-5" />
+              <Send className="h-4 w-4 text-white" />
             </a>
             <a
               href="https://vk.com/piercing_profi24"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors"
+              className="h-9 w-9 rounded-full bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
             >
-              <SiVk className="h-5 w-5" />
+              <SiVk className="h-4 w-4 text-white" />
             </a>
             <Button
               asChild
@@ -120,14 +120,29 @@ const Header = () => {
               </Link>
             ))}
             <div className="flex gap-4 pt-4">
-              <a href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==" target="_blank" rel="noopener noreferrer">
-                <Instagram className="h-5 w-5" />
+              <a 
+                href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="h-9 w-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
+              >
+                <Instagram className="h-4 w-4 text-white" />
               </a>
-              <a href="https://t.me/piercing_prof" target="_blank" rel="noopener noreferrer">
-                <Send className="h-5 w-5" />
+              <a 
+                href="https://t.me/piercing_prof" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="h-9 w-9 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
+              >
+                <Send className="h-4 w-4 text-white" />
               </a>
-              <a href="https://vk.com/piercing_profi24" target="_blank" rel="noopener noreferrer">
-                <SiVk className="h-5 w-5" />
+              <a 
+                href="https://vk.com/piercing_profi24" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="h-9 w-9 rounded-full bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
+              >
+                <SiVk className="h-4 w-4 text-white" />
               </a>
             </div>
             <Button
