@@ -1,7 +1,34 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Hero = () => {
+  const [showPhoneDialog, setShowPhoneDialog] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const phoneNumber = "+79858504801";
+  const phoneDisplay = "+7 (985) 850-48-01";
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    };
+    checkMobile();
+  }, []);
+
+  const handleCallClick = (e: React.MouseEvent) => {
+    if (!isMobile) {
+      e.preventDefault();
+      setShowPhoneDialog(true);
+    }
+  };
+
   return (
     <section 
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-background/95"
@@ -70,12 +97,32 @@ const Hero = () => {
               size="lg" 
               className="text-lg px-10 py-7 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-primary/25"
             >
-              <a href="https://wa.me/79858504801">
+              <a href={`tel:${phoneNumber}`} onClick={handleCallClick}>
                 Записаться
-                <ArrowRight className="ml-2" />
+                <Phone className="ml-2" />
               </a>
             </Button>
           </div>
+
+          <Dialog open={showPhoneDialog} onOpenChange={setShowPhoneDialog}>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">Позвоните нам</DialogTitle>
+                <DialogDescription className="text-base pt-4">
+                  Наш номер телефона для записи:
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex items-center justify-center py-6">
+                <a 
+                  href={`tel:${phoneNumber}`}
+                  className="text-3xl font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-3"
+                >
+                  <Phone className="h-8 w-8" />
+                  {phoneDisplay}
+                </a>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </section>
