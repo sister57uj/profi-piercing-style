@@ -40,7 +40,7 @@ const Portfolio = () => {
   ];
 
   return (
-    <section className="py-20 bg-card relative overflow-hidden" id="portfolio">
+    <section className="py-20 relative overflow-hidden" id="portfolio">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
