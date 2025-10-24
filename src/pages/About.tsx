@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Award, Heart, Shield, TrendingUp } from "lucide-react";
+import ekaterina from "@/assets/ekaterina-vasina.jpg";
 
 const About = () => {
   return (
@@ -14,25 +15,46 @@ const About = () => {
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
                 Наши сотрудники
               </h2>
-              <div className="bg-card p-8 rounded-lg border border-primary/20 max-w-3xl mx-auto">
-                <h3 className="text-2xl font-semibold mb-4 text-primary">Екатерина Васина</h3>
-                <p className="text-muted-foreground mb-4">
-                  Эксперт по пирсингу с медицинским образованием. Екатерина работает в сфере 
-                  пирсинга с 2017 года и за это время выполнила тысячи успешных процедур.
-                </p>
-                <p className="text-muted-foreground mb-4">
-                  Она специализируется на всех видах пирсинга — от классического крыла носа 
-                  до сложных проектов как индастриал и микродермалы. Екатерина подходит к 
-                  каждому клиенту индивидуально, помогая воплотить любые идеи с учетом 
-                  анатомических особенностей.
-                </p>
-                <div className="pt-4 border-t border-border space-y-2">
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-foreground">Образование:</strong> Медицинское образование, сертификация по пирсингу
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-foreground">Опыт:</strong> Более 7 лет в индустрии пирсинга
-                  </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Екатерина Васина */}
+                <div className="bg-card rounded-lg border border-primary/20 overflow-hidden hover-lift">
+                  <div className="aspect-[3/4] relative overflow-hidden">
+                    <img 
+                      src={ekaterina} 
+                      alt="Екатерина Васина - мастер пирсинга"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-2 text-primary">Екатерина Васина</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Эксперт по пирсингу с медицинским образованием. Работает с 2017 года.
+                    </p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      <p><strong className="text-foreground">Образование:</strong> Медицинское, сертификация по пирсингу</p>
+                      <p><strong className="text-foreground">Опыт:</strong> Более 7 лет</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Пустая карточка 1 */}
+                <div className="bg-card rounded-lg border border-dashed border-primary/40 overflow-hidden hover-lift flex flex-col items-center justify-center p-8 min-h-[400px]">
+                  <div className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/40 flex items-center justify-center mb-4">
+                    <svg className="w-12 h-12 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </div>
+                  <p className="text-muted-foreground text-center">Скоро появится новый мастер</p>
+                </div>
+
+                {/* Пустая карточка 2 */}
+                <div className="bg-card rounded-lg border border-dashed border-primary/40 overflow-hidden hover-lift flex flex-col items-center justify-center p-8 min-h-[400px]">
+                  <div className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/40 flex items-center justify-center mb-4">
+                    <svg className="w-12 h-12 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </div>
+                  <p className="text-muted-foreground text-center">Скоро появится новый мастер</p>
                 </div>
               </div>
             </div>
