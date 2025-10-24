@@ -119,12 +119,12 @@ export const EditableText = ({
   }
 
   return (
-    <div className="relative group inline-block w-full">
+    <div className="relative group inline-flex items-center gap-2">
       <Component className={className}>{value}</Component>
       <Button
         size="sm"
         variant="ghost"
-        className="absolute -right-10 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 h-auto"
         onClick={() => setIsEditing(true)}
       >
         <Pencil className="h-4 w-4 text-primary" />

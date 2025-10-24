@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { useState, useEffect } from "react";
+import { EditableText } from "@/components/admin/EditableText";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
@@ -10,15 +12,32 @@ import telegramIcon from "@/assets/telegram-icon.webp";
 import vkIcon from "@/assets/vk-icon.png";
 
 const Contacts = () => {
+  const [pageTitle, setPageTitle] = useState("Контакты");
+  const [pageDescription, setPageDescription] = useState("Свяжитесь с нами удобным способом");
   const [showPhoneDialog, setShowPhoneDialog] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    loadContent();
     const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
     setIsMobile(checkMobile);
   }, []);
+
+  const loadContent = async () => {
+    const { data } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('page', 'contacts');
+
+    if (data) {
+      data.forEach(item => {
+        if (item.content_key === 'page_title') setPageTitle(item.content_value);
+        if (item.content_key === 'page_description') setPageDescription(item.content_value);
+      });
+    }
+  };
 
   const handleCallClick = (e: React.MouseEvent) => {
     if (!isMobile) {
@@ -35,12 +54,24 @@ const Contacts = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero */}
             <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-              Контакты
-            </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Свяжитесь с нами удобным способом
-              </p>
+              <EditableText
+                initialValue={pageTitle}
+                onSave={setPageTitle}
+                page="contacts"
+                section="hero"
+                contentKey="page_title"
+                as="h1"
+                className="text-5xl md:text-6xl font-display font-bold mb-6"
+              />
+              <EditableText
+                initialValue={pageDescription}
+                onSave={setPageDescription}
+                page="contacts"
+                section="hero"
+                contentKey="page_description"
+                as="p"
+                className="text-xl text-muted-foreground max-w-2xl mx-auto"
+              />
             </div>
 
             <div className="max-w-2xl mx-auto mb-16">

@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
+import { EditableText } from "@/components/admin/EditableText";
+import { EditableLink } from "@/components/admin/EditableLink";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Info, Phone } from "lucide-react";
 import {
@@ -16,6 +19,26 @@ import {
 const Pricing = () => {
   const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
   const [promotionsDialogOpen, setPromotionsDialogOpen] = useState(false);
+  const [pageTitle, setPageTitle] = useState("Прайс-лист");
+  const [pageDescription, setPageDescription] = useState("Прозрачные цены на все виды пирсинга. Стоимость указана без учета украшений");
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    const { data } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('page', 'pricing');
+
+    if (data) {
+      data.forEach(item => {
+        if (item.content_key === 'page_title') setPageTitle(item.content_value);
+        if (item.content_key === 'page_description') setPageDescription(item.content_value);
+      });
+    }
+  };
 
   const prices = [
     {
@@ -74,12 +97,25 @@ const Pricing = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero */}
             <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-              Прайс-лист
-            </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Прозрачные цены на все виды пирсинга. Стоимость указана без учета украшений
-              </p>
+              <EditableText
+                initialValue={pageTitle}
+                onSave={setPageTitle}
+                page="pricing"
+                section="hero"
+                contentKey="page_title"
+                as="h1"
+                className="text-5xl md:text-6xl font-display font-bold mb-6"
+              />
+              <EditableText
+                initialValue={pageDescription}
+                onSave={setPageDescription}
+                page="pricing"
+                section="hero"
+                contentKey="page_description"
+                multiline
+                as="p"
+                className="text-xl text-muted-foreground max-w-2xl mx-auto"
+              />
             </div>
 
             {/* Important note */}
@@ -194,15 +230,15 @@ const Pricing = () => {
                 Свяжитесь с нами для подробной консультации
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="lg"
+                <EditableLink
+                  initialText="Записаться"
+                  initialUrl="https://dikidi.net/1196602"
+                  onSave={() => {}}
+                  page="pricing"
+                  section="cta"
+                  contentKey="booking_button"
                   className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
-                >
-                  <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
-                    Записаться
-                  </a>
-                </Button>
+                />
                 <Dialog open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}>
                   <DialogTrigger asChild>
                     <Button

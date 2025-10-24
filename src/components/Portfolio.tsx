@@ -1,53 +1,144 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
-import { PortfolioManager } from "@/components/admin/PortfolioManager";
-import nostrilPiercing from "@/assets/nostril-piercing.jpg";
-import septumPiercing from "@/assets/septum-piercing.jpg";
-import nasallangPiercing from "@/assets/nasallang-piercing.jpg";
-import bridgePiercing from "@/assets/bridge-piercing.jpg";
-import eyebrowPiercing from "@/assets/eyebrow-new.jpg";
-import antiEyebrowPiercing from "@/assets/anti-eyebrow-piercing.jpg";
-import lipPiercing from "@/assets/lip-new.jpg";
-import cheekPiercing from "@/assets/cheek-piercing.jpg";
-import lobePiercing from "@/assets/lobe-piercing.jpg";
-import helixPiercing from "@/assets/helix-piercing.jpg";
-import industrialPiercing from "@/assets/industrial-new.jpg";
-import tragusPiercing from "@/assets/tragus-piercing.jpg";
-import daithPiercing from "@/assets/daith-piercing.jpg";
-import rookPiercing from "@/assets/rook-piercing.jpg";
-import navelPiercing from "@/assets/navel-piercing.jpg";
-import microdermalPiercing from "@/assets/microdermal-new.jpg";
-import nipplePiercing from "@/assets/nipple-piercing.jpg";
-import intimatePiercing from "@/assets/intimate-piercing.jpg";
+import { PortfolioItemEditor } from "@/components/admin/PortfolioItemEditor";
+import { supabase } from "@/integrations/supabase/client";
+import { useAdmin } from "@/contexts/AdminContext";
+import { useToast } from "@/hooks/use-toast";
+import { Pencil, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  cover_image: string | null;
+  sort_order: number;
+}
+
+interface PortfolioImage {
+  id: string;
+  portfolio_item_id: string;
+  image_url: string;
+  sort_order: number;
+}
 
 const Portfolio = () => {
   const [portfolioTitle, setPortfolioTitle] = useState("Наши услуги");
   const [portfolioDescription, setPortfolioDescription] = useState(
     "Красивый пирсинг для каждого. Каждая работа — это уникальное сочетание профессионализма, безопасности и эстетики."
   );
+  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [images, setImages] = useState<PortfolioImage[]>([]);
+  const [editingItem, setEditingItem] = useState<PortfolioItem | null>(null);
+  const [showAddDialog, setShowAddDialog] = useState(false);
+  const [newItemTitle, setNewItemTitle] = useState("");
+  const [newItemCategory, setNewItemCategory] = useState("");
+  const { isAdmin } = useAdmin();
+  const { toast } = useToast();
 
-  const initialWorks = [
-    { id: "1", title: "Крыло носа", category: "Нос", image: nostrilPiercing },
-    { id: "2", title: "Септум", category: "Нос", image: septumPiercing },
-    { id: "3", title: "Nasallang", category: "Нос", image: nasallangPiercing },
-    { id: "4", title: "Бридж", category: "Лицо", image: bridgePiercing },
-    { id: "5", title: "Бровь", category: "Лицо", image: eyebrowPiercing },
-    { id: "6", title: "Anti-eyebrow", category: "Лицо", image: antiEyebrowPiercing },
-    { id: "7", title: "Губа", category: "Лицо", image: lipPiercing },
-    { id: "8", title: "Щека", category: "Лицо", image: cheekPiercing },
-    { id: "9", title: "Мочка уха", category: "Ухо", image: lobePiercing },
-    { id: "10", title: "Хеликс", category: "Ухо", image: helixPiercing },
-    { id: "11", title: "Индастриал", category: "Ухо", image: industrialPiercing },
-    { id: "12", title: "Трагус", category: "Ухо", image: tragusPiercing },
-    { id: "13", title: "Дэйс", category: "Ухо", image: daithPiercing },
-    { id: "14", title: "Рук", category: "Ухо", image: rookPiercing },
-    { id: "15", title: "Пупок", category: "Тело", image: navelPiercing },
-    { id: "16", title: "Микродермалы", category: "Тело", image: microdermalPiercing },
-    { id: "17", title: "Соски", category: "Тело", image: nipplePiercing },
-    { id: "18", title: "Интимный пирсинг", category: "Тело", image: intimatePiercing }
-  ];
+  useEffect(() => {
+    loadContent();
+    loadPortfolioItems();
+  }, []);
 
-  const [works, setWorks] = useState(initialWorks);
+  const loadContent = async () => {
+    const { data } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('page', 'home')
+      .eq('section', 'portfolio');
+
+    if (data) {
+      const titleContent = data.find(c => c.content_key === 'title');
+      const descContent = data.find(c => c.content_key === 'description');
+      
+      if (titleContent) setPortfolioTitle(titleContent.content_value);
+      if (descContent) setPortfolioDescription(descContent.content_value);
+    }
+  };
+
+  const loadPortfolioItems = async () => {
+    const { data: itemsData } = await supabase
+      .from('portfolio_items')
+      .select('*')
+      .order('sort_order');
+
+    const { data: imagesData } = await supabase
+      .from('portfolio_images')
+      .select('*')
+      .order('sort_order');
+
+    if (itemsData) setItems(itemsData);
+    if (imagesData) setImages(imagesData);
+  };
+
+  const handleAddItem = async () => {
+    if (!newItemTitle || !newItemCategory) {
+      toast({
+        variant: 'destructive',
+        title: 'Ошибка',
+        description: 'Заполните все поля'
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('portfolio_items')
+        .insert({
+          title: newItemTitle,
+          category: newItemCategory,
+          sort_order: items.length
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: 'Успешно',
+        description: 'Новая карточка добавлена'
+      });
+      
+      setShowAddDialog(false);
+      setNewItemTitle("");
+      setNewItemCategory("");
+      loadPortfolioItems();
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Ошибка',
+        description: error.message
+      });
+    }
+  };
+
+  const handleDeleteItem = async (itemId: string) => {
+    if (!confirm('Удалить эту карточку?')) return;
+
+    try {
+      const { error } = await supabase
+        .from('portfolio_items')
+        .delete()
+        .eq('id', itemId);
+
+      if (error) throw error;
+
+      toast({
+        title: 'Удалено',
+        description: 'Карточка успешно удалена'
+      });
+      
+      loadPortfolioItems();
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Ошибка',
+        description: error.message
+      });
+    }
+  };
 
   return (
     <section className="py-20 relative overflow-hidden" id="portfolio">
@@ -75,34 +166,108 @@ const Portfolio = () => {
             />
           </div>
 
-          <PortfolioManager items={works} onUpdate={setWorks} />
+          {isAdmin && (
+            <div className="flex justify-center mb-8">
+              <Button onClick={() => setShowAddDialog(true)}>
+                <Plus className="h-4 w-4 mr-2" />
+                Добавить карточку
+              </Button>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {works.map((work, index) => (
-              <div
-                key={work.title}
-                className="group relative aspect-square bg-background rounded-lg overflow-hidden border border-border hover:border-primary/60 transition-all hover-lift animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <img 
-                  src={work.image} 
-                  alt={`${work.title} - ${work.category}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
-                <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
-                  <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
-                    {work.title}
-                  </h3>
-                  <span className="text-sm text-muted-foreground px-3 py-1 bg-card/80 backdrop-blur-sm rounded-full border border-border">
-                    {work.category}
-                  </span>
+            {items.map((item, index) => {
+              const itemImages = images.filter(img => img.portfolio_item_id === item.id);
+              const displayImage = item.cover_image || itemImages[0]?.image_url;
+              
+              return (
+                <div
+                  key={item.id}
+                  className="group relative aspect-square bg-background rounded-lg overflow-hidden border border-border hover:border-primary/60 transition-all hover-lift animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {displayImage && (
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${item.category}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
+                    <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    <span className="text-sm text-muted-foreground px-3 py-1 bg-card/80 backdrop-blur-sm rounded-full border border-border">
+                      {item.category}
+                    </span>
+                  </div>
+
+                  {isAdmin && (
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        onClick={() => setEditingItem(item)}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="destructive"
+                        onClick={() => handleDeleteItem(item.id)}
+                      >
+                        ✕
+                      </Button>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {editingItem && (
+        <PortfolioItemEditor
+          item={editingItem}
+          images={images.filter(img => img.portfolio_item_id === editingItem.id)}
+          isOpen={!!editingItem}
+          onClose={() => setEditingItem(null)}
+          onUpdate={loadPortfolioItems}
+        />
+      )}
+
+      <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Добавить новую карточку</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="title">Название</Label>
+              <Input
+                id="title"
+                value={newItemTitle}
+                onChange={(e) => setNewItemTitle(e.target.value)}
+                placeholder="Крыло носа"
+              />
+            </div>
+            <div>
+              <Label htmlFor="category">Категория</Label>
+              <Input
+                id="category"
+                value={newItemCategory}
+                onChange={(e) => setNewItemCategory(e.target.value)}
+                placeholder="Нос"
+              />
+            </div>
+            <Button onClick={handleAddItem} className="w-full">
+              Создать
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

@@ -3,8 +3,37 @@ import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { Award, Heart, Shield, TrendingUp, CheckCircle } from "lucide-react";
 import ekaterina from "@/assets/ekaterina-vasina.jpg";
+import { useState, useEffect } from "react";
+import { EditableText } from "@/components/admin/EditableText";
+import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
+  const [pageTitle, setPageTitle] = useState("Наши сотрудники");
+  const [historyTitle, setHistoryTitle] = useState("Наша история");
+  const [historyText1, setHistoryText1] = useState("С 2017 года студия «Пирсинг Профи» создает безопасный и стильный пирсинг в Москве. Мы начали с небольшой студии и искренней любви к своему делу, и за годы работы заслужили доверие сотен клиентов.");
+  const [historyText2, setHistoryText2] = useState("В 2018 году наша студия была представлена в программе НТВ «Чудо техники» как образец профессионального подхода к пирсингу в России. Это признание стало подтверждением нашего профессионализма и ответственного отношения к работе.");
+  const [historyText3, setHistoryText3] = useState("Сегодня мы продолжаем совершенствоваться, следим за мировыми трендами в пирсинге и используем только проверенные методы стерилизации и лучшие материалы.");
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    const { data } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('page', 'about');
+
+    if (data) {
+      data.forEach(item => {
+        if (item.content_key === 'page_title') setPageTitle(item.content_value);
+        if (item.content_key === 'history_title') setHistoryTitle(item.content_value);
+        if (item.content_key === 'history_text_1') setHistoryText1(item.content_value);
+        if (item.content_key === 'history_text_2') setHistoryText2(item.content_value);
+        if (item.content_key === 'history_text_3') setHistoryText3(item.content_value);
+      });
+    }
+  };
   return (
     <div className="min-h-screen">
       <Header />
@@ -13,9 +42,15 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             {/* Наши сотрудники */}
             <div className="mb-16 animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
-                Наши сотрудники
-              </h2>
+              <EditableText
+                initialValue={pageTitle}
+                onSave={setPageTitle}
+                page="about"
+                section="team"
+                contentKey="page_title"
+                as="h2"
+                className="text-4xl md:text-5xl font-display font-bold mb-8 text-center"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Екатерина Васина */}
                 <div className="bg-card rounded-lg border border-primary/20 overflow-hidden hover-lift">
@@ -63,24 +98,43 @@ const About = () => {
             {/* История */}
             <div className="mb-16 animate-fade-in">
               <div className="bg-card p-8 rounded-lg border border-border">
-                <h2 className="text-3xl font-display font-semibold mb-4 text-primary">
-                  Наша история
-                </h2>
+                <EditableText
+                  initialValue={historyTitle}
+                  onSave={setHistoryTitle}
+                  page="about"
+                  section="history"
+                  contentKey="history_title"
+                  as="h2"
+                  className="text-3xl font-display font-semibold mb-4 text-primary"
+                />
                 <div className="space-y-4 text-muted-foreground">
-                  <p>
-                    С 2017 года студия «Пирсинг Профи» создает безопасный и стильный пирсинг в Москве. 
-                    Мы начали с небольшой студии и искренней любви к своему делу, и за годы работы 
-                    заслужили доверие сотен клиентов.
-                  </p>
-                  <p>
-                    В 2018 году наша студия была представлена в программе НТВ «Чудо техники» как 
-                    образец профессионального подхода к пирсингу в России. Это признание стало 
-                    подтверждением нашего профессионализма и ответственного отношения к работе.
-                  </p>
-                  <p>
-                    Сегодня мы продолжаем совершенствоваться, следим за мировыми трендами в 
-                    пирсинге и используем только проверенные методы стерилизации и лучшие материалы.
-                  </p>
+                  <EditableText
+                    initialValue={historyText1}
+                    onSave={setHistoryText1}
+                    page="about"
+                    section="history"
+                    contentKey="history_text_1"
+                    multiline
+                    as="p"
+                  />
+                  <EditableText
+                    initialValue={historyText2}
+                    onSave={setHistoryText2}
+                    page="about"
+                    section="history"
+                    contentKey="history_text_2"
+                    multiline
+                    as="p"
+                  />
+                  <EditableText
+                    initialValue={historyText3}
+                    onSave={setHistoryText3}
+                    page="about"
+                    section="history"
+                    contentKey="history_text_3"
+                    multiline
+                    as="p"
+                  />
                 </div>
               </div>
             </div>

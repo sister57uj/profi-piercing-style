@@ -1,12 +1,34 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
+import { EditableLink } from "@/components/admin/EditableLink";
+import { supabase } from "@/integrations/supabase/client";
 
 const Hero = () => {
   const [tagline, setTagline] = useState("МЕДИЦИНСКИЙ ПОДХОД К ПИРСИНГУ");
   const [title, setTitle] = useState("Профессиональный");
   const [subtitle, setSubtitle] = useState("Пирсинг");
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    const { data } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('page', 'home')
+      .eq('section', 'hero');
+
+    if (data) {
+      const taglineContent = data.find(c => c.content_key === 'tagline');
+      const titleContent = data.find(c => c.content_key === 'title');
+      const subtitleContent = data.find(c => c.content_key === 'subtitle');
+      
+      if (taglineContent) setTagline(taglineContent.content_value);
+      if (titleContent) setTitle(titleContent.content_value);
+      if (subtitleContent) setSubtitle(subtitleContent.content_value);
+    }
+  };
 
   return (
     <section 
@@ -84,20 +106,15 @@ const Hero = () => {
           </div>
           
           <div className="pt-8 flex justify-center">
-            <Button 
-              asChild 
-              size="lg" 
+            <EditableLink
+              initialText="Записаться онлайн"
+              initialUrl="https://dikidi.net/1196602"
+              onSave={(text, url) => {}}
+              page="home"
+              section="hero"
+              contentKey="booking_button"
               className="text-lg px-10 py-7 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-primary/25"
-            >
-              <a 
-                href="https://dikidi.net/1196602" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Записаться онлайн
-                <ArrowRight className="ml-2" />
-              </a>
-            </Button>
+            />
           </div>
         </div>
       </div>
