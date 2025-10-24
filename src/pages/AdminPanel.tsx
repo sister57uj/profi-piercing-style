@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { LogOut, Settings, FileText } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -20,24 +21,42 @@ const AdminPanel = () => {
 
   const checkAdmin = async () => {
     try {
-      const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+      const { data: { session } } = await supabase.auth.getSession();
       
-      if (isLoggedIn !== 'true') {
-        navigate('/admin-login');
+      if (!session?.user) {
+        navigate('/profi-admin-2025');
+        return;
+      }
+
+      // Проверяем роль админа
+      const { data: roles } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', session.user.id)
+        .eq('role', 'admin')
+        .single();
+
+      if (!roles) {
+        toast({
+          variant: "destructive",
+          title: "Доступ запрещен",
+          description: "У вас нет прав администратора"
+        });
+        navigate('/');
         return;
       }
 
       setIsAdmin(true);
     } catch (error) {
       console.error('Ошибка проверки прав:', error);
-      navigate('/admin-login');
+      navigate('/profi-admin-2025');
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    sessionStorage.removeItem('adminLoggedIn');
+    await supabase.auth.signOut();
     toast({
       title: "Выход выполнен",
       description: "Вы вышли из системы",
