@@ -9,7 +9,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { toast } from "sonner";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
-import vkIcon from "@/assets/vk-icon.jpg";
+import vkIcon from "@/assets/vk-icon.png";
 
 const Contacts = () => {
   const [formData, setFormData] = useState({

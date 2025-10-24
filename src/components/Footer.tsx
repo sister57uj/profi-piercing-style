@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
-import vkIcon from "@/assets/vk-icon.jpg";
+import vkIcon from "@/assets/vk-icon.png";
 
 const Footer = () => {
   return (
