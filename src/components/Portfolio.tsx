@@ -1,14 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
+import nostrilPiercing from "@/assets/nostril-piercing.jpg";
+import septumPiercing from "@/assets/septum-piercing.jpg";
+import eyebrowPiercing from "@/assets/eyebrow-piercing.jpg";
+import industrialPiercing from "@/assets/industrial-piercing.jpg";
+import lipPiercing from "@/assets/lip-piercing.jpg";
+import microdermalPiercing from "@/assets/microdermal-piercing.jpg";
 
 const Portfolio = () => {
   const works = [
-    { title: "Крыло носа", category: "Нос" },
-    { title: "Септум", category: "Нос" },
-    { title: "Пирсинг брови", category: "Лицо" },
-    { title: "Индастриал", category: "Ухо" },
-    { title: "Губа", category: "Лицо" },
-    { title: "Микродермалы", category: "Тело" }
+    { title: "Крыло носа", category: "Нос", image: nostrilPiercing },
+    { title: "Септум", category: "Нос", image: septumPiercing },
+    { title: "Пирсинг брови", category: "Лицо", image: eyebrowPiercing },
+    { title: "Индастриал", category: "Ухо", image: industrialPiercing },
+    { title: "Губа", category: "Лицо", image: lipPiercing },
+    { title: "Микродермалы", category: "Тело", image: microdermalPiercing }
   ];
 
   return (
@@ -32,12 +38,17 @@ const Portfolio = () => {
                 className="group relative aspect-square bg-background rounded-lg overflow-hidden border border-border hover:border-primary/60 transition-all hover-lift animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                <img 
+                  src={work.image} 
+                  alt={`${work.title} - ${work.category}`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
                   <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
                     {work.title}
                   </h3>
-                  <span className="text-sm text-muted-foreground px-3 py-1 bg-card/80 rounded-full border border-border">
+                  <span className="text-sm text-muted-foreground px-3 py-1 bg-card/80 backdrop-blur-sm rounded-full border border-border">
                     {work.category}
                   </span>
                 </div>
