@@ -42,7 +42,7 @@ const Contacts = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div className="max-w-2xl mx-auto mb-16">
               {/* Contact info */}
               <div className="space-y-8">
                 <div className="animate-fade-in">
@@ -142,17 +142,6 @@ const Contacts = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-
-              {/* Call to Action */}
-              <div className="animate-fade-in flex items-center justify-center" style={{ animationDelay: "0.1s" }}>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-xl px-12 py-8 h-auto"
-                >
-                  <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
-                </Button>
               </div>
             </div>
 

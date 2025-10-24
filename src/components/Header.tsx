@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
@@ -95,7 +95,10 @@ const Header = () => {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
             >
-              <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
+              <a href="tel:+79858504801" onClick={handleCallClick}>
+                Записаться
+                <Phone className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
 
@@ -151,7 +154,10 @@ const Header = () => {
               asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <a href="tel:+79858504801" onClick={handleCallClick}>Записаться</a>
+              <a href="tel:+79858504801" onClick={handleCallClick}>
+                Записаться
+                <Phone className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
         )}
