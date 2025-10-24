@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Menu, X, Phone, LogOut, Shield } from "lucide-react";
 import { useAdmin } from "@/contexts/AdminContext";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.jpg";
 import instagramIcon from "@/assets/instagram-icon.webp";
 import telegramIcon from "@/assets/telegram-icon.webp";
@@ -45,9 +46,9 @@ const Header = () => {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('adminLoggedIn');
-    checkAdmin();
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    await checkAdmin();
     toast({
       title: "Выход выполнен",
       description: "Вы вышли из режима администратора"

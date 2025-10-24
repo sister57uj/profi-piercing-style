@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AdminContextType {
   isAdmin: boolean;
-  checkAdmin: () => void;
+  checkAdmin: () => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -10,16 +11,34 @@ const AdminContext = createContext<AdminContextType | undefined>(undefined);
 export const AdminProvider = ({ children }: { children: ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const checkAdmin = () => {
-    const loggedIn = sessionStorage.getItem('adminLoggedIn');
-    setIsAdmin(loggedIn === 'true');
+  const checkAdmin = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session?.user) {
+      setIsAdmin(false);
+      return;
+    }
+
+    // Проверяем роль пользователя в базе данных
+    const { data: roles } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', session.user.id)
+      .eq('role', 'admin')
+      .single();
+
+    setIsAdmin(!!roles);
   };
 
   useEffect(() => {
     checkAdmin();
-    // Проверяем каждые 2 секунды на случай изменения статуса
-    const interval = setInterval(checkAdmin, 2000);
-    return () => clearInterval(interval);
+
+    // Подписываемся на изменения авторизации
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      checkAdmin();
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
