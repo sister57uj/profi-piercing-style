@@ -61,9 +61,9 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <img src={logo} alt="Пирсинг Профи" className="h-7 w-7 sm:h-10 sm:w-10" />
-            <span className="text-base sm:text-xl font-bebas tracking-wider neon-text-pink">
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-1 sm:gap-2 hover:opacity-80 transition-opacity">
+            <img src={logo} alt="Пирсинг Профи" className="h-6 w-6 sm:h-10 sm:w-10" />
+            <span className="text-sm sm:text-xl font-bebas tracking-wider neon-text-pink">
               Пирсинг Профи
             </span>
           </Link>
@@ -82,7 +82,7 @@ const Header = () => {
           </div>
 
           {/* Social Links & CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 lg:gap-4">
             {isAdmin && (
               <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded-full">
                 <Shield className="h-4 w-4 text-primary" />
@@ -101,7 +101,7 @@ const Header = () => {
               href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 hover:scale-110 transition-all"
+              className="h-7 w-7 lg:h-9 lg:w-9 hover:scale-110 transition-all"
             >
               <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
             </a>
@@ -109,7 +109,7 @@ const Header = () => {
               href="https://t.me/piercing_prof"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 hover:scale-110 transition-all"
+              className="h-7 w-7 lg:h-9 lg:w-9 hover:scale-110 transition-all"
             >
               <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
             </a>
@@ -117,13 +117,14 @@ const Header = () => {
               href="https://vk.com/piercing_profi24"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 hover:scale-110 transition-all"
+              className="h-7 w-7 lg:h-9 lg:w-9 hover:scale-110 transition-all"
             >
               <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
             </a>
             <Button
               asChild
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow"
+              size="sm"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-xs lg:text-sm px-3 lg:px-4"
             >
               <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
                 Записаться
