@@ -61,9 +61,9 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src={logo} alt="Пирсинг Профи" className="h-10 w-10" />
-            <span className="text-xl font-bebas tracking-wider neon-text-pink">
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <img src={logo} alt="Пирсинг Профи" className="h-7 w-7 sm:h-10 sm:w-10" />
+            <span className="text-base sm:text-xl font-bebas tracking-wider neon-text-pink">
               Пирсинг Профи
             </span>
           </Link>
