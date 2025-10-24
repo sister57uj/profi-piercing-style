@@ -45,7 +45,7 @@ const ScrollingBackground = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0, 0, 0, 0.4) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 80%)',
         }}
       />
     </div>
