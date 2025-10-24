@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, Instagram, Send } from "lucide-react";
-import { SiVk } from "react-icons/si";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { toast } from "sonner";
+import instagramIcon from "@/assets/instagram-icon.webp";
+import telegramIcon from "@/assets/telegram-icon.webp";
+import vkIcon from "@/assets/vk-icon.jpg";
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
@@ -123,25 +125,25 @@ const Contacts = () => {
                       href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
+                      className="h-12 w-12 hover:scale-110 transition-all"
                     >
-                      <Instagram className="h-6 w-6 text-white" />
+                      <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
                     </a>
                     <a
                       href="https://t.me/piercing_prof"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
+                      className="h-12 w-12 hover:scale-110 transition-all"
                     >
-                      <Send className="h-6 w-6 text-white" />
+                      <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
                     </a>
                     <a
                       href="https://vk.com/piercing_profi24"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-lg bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
+                      className="h-12 w-12 hover:scale-110 transition-all"
                     >
-                      <SiVk className="h-6 w-6 text-white" />
+                      <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
                     </a>
                   </div>
                 </div>

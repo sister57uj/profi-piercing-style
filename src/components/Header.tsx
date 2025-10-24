@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Menu, X, Instagram, Send } from "lucide-react";
-import { SiVk } from "react-icons/si";
+import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.jpg";
+import instagramIcon from "@/assets/instagram-icon.webp";
+import telegramIcon from "@/assets/telegram-icon.webp";
+import vkIcon from "@/assets/vk-icon.jpg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,25 +71,25 @@ const Header = () => {
               href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
+              className="h-9 w-9 hover:scale-110 transition-all"
             >
-              <Instagram className="h-4 w-4 text-white" />
+              <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
             </a>
             <a
               href="https://t.me/piercing_prof"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
+              className="h-9 w-9 hover:scale-110 transition-all"
             >
-              <Send className="h-4 w-4 text-white" />
+              <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
             </a>
             <a
               href="https://vk.com/piercing_profi24"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 w-9 rounded-full bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
+              className="h-9 w-9 hover:scale-110 transition-all"
             >
-              <SiVk className="h-4 w-4 text-white" />
+              <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
             </a>
             <Button
               asChild
@@ -124,25 +126,25 @@ const Header = () => {
                 href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-all"
+                className="h-9 w-9 hover:scale-110 transition-all"
               >
-                <Instagram className="h-4 w-4 text-white" />
+                <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
               </a>
               <a 
                 href="https://t.me/piercing_prof" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-all"
+                className="h-9 w-9 hover:scale-110 transition-all"
               >
-                <Send className="h-4 w-4 text-white" />
+                <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
               </a>
               <a 
                 href="https://vk.com/piercing_profi24" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 rounded-full bg-[#0077FF] flex items-center justify-center hover:scale-110 transition-all"
+                className="h-9 w-9 hover:scale-110 transition-all"
               >
-                <SiVk className="h-4 w-4 text-white" />
+                <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
               </a>
             </div>
             <Button
