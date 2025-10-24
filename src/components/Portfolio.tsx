@@ -141,10 +141,10 @@ const Portfolio = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden" id="portfolio">
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden" id="portfolio">
+      <div className="container mx-auto px-3 sm:px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
             <EditableText
               initialValue={portfolioTitle}
               onSave={setPortfolioTitle}
@@ -152,7 +152,7 @@ const Portfolio = () => {
               section="portfolio"
               contentKey="title"
               as="h2"
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 sm:mb-4"
             />
             <EditableText
               initialValue={portfolioDescription}
@@ -162,20 +162,20 @@ const Portfolio = () => {
               contentKey="description"
               multiline
               as="p"
-              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4"
             />
           </div>
 
           {isAdmin && (
-            <div className="flex justify-center mb-8">
-              <Button onClick={() => setShowAddDialog(true)}>
+            <div className="flex justify-center mb-6 sm:mb-8">
+              <Button onClick={() => setShowAddDialog(true)} className="touch-manipulation w-full sm:w-auto">
                 <Plus className="h-4 w-4 mr-2" />
                 Добавить карточку
               </Button>
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
             {items.map((item, index) => {
               const itemImages = images.filter(img => img.portfolio_item_id === item.id);
               const displayImage = item.cover_image || itemImages[0]?.image_url;
@@ -194,28 +194,30 @@ const Portfolio = () => {
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
-                    <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  <div className="absolute inset-0 flex flex-col items-center justify-end p-4 sm:p-5 md:p-6 text-center">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-1.5 sm:mb-2 text-foreground group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <span className="text-sm text-muted-foreground px-3 py-1 bg-card/80 backdrop-blur-sm rounded-full border border-border">
+                    <span className="text-xs sm:text-sm text-muted-foreground px-2.5 sm:px-3 py-0.5 sm:py-1 bg-card/80 backdrop-blur-sm rounded-full border border-border">
                       {item.category}
                     </span>
                   </div>
 
                   {isAdmin && (
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                    <div className="absolute top-2 right-2 opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex gap-1.5 sm:gap-2">
                       <Button
                         size="sm"
                         variant="secondary"
                         onClick={() => setEditingItem(item)}
+                        className="touch-manipulation h-8 sm:h-9"
                       >
-                        <Pencil className="h-4 w-4" />
+                        <Pencil className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       </Button>
                       <Button
                         size="sm"
                         variant="destructive"
                         onClick={() => handleDeleteItem(item.id)}
+                        className="touch-manipulation h-8 sm:h-9"
                       >
                         ✕
                       </Button>

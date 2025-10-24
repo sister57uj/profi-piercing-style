@@ -33,10 +33,10 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-card" id="about">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-card" id="about">
+      <div className="container mx-auto px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
             <EditableText
               initialValue={aboutTitle}
               onSave={setAboutTitle}
@@ -44,7 +44,7 @@ const AboutSection = () => {
               section="about"
               contentKey="title"
               as="h2"
-              className="text-4xl md:text-5xl font-bebas mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bebas mb-3 sm:mb-4"
             />
             <EditableText
               initialValue={aboutDescription}
@@ -54,26 +54,26 @@ const AboutSection = () => {
               contentKey="description"
               multiline
               as="p"
-              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
               <div
                 key={feature.title}
-                className="p-8 rounded-lg bg-card/50 border border-primary/30 hover:border-primary/60 hover-glow animate-fade-in"
+                className="p-5 sm:p-6 md:p-8 rounded-lg bg-card/50 border border-primary/30 hover:border-primary/60 hover-glow animate-fade-in"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="mb-4">
-                  <Icon className={`h-12 w-12 ${feature.colorClass}`} />
+                <div className="mb-3 sm:mb-4">
+                  <Icon className={`h-10 w-10 sm:h-12 sm:w-12 ${feature.colorClass}`} />
                 </div>
-                <h3 className={`text-2xl font-bebas mb-3 tracking-wide ${feature.colorClass}`}>
+                <h3 className={`text-xl sm:text-2xl font-bebas mb-2 sm:mb-3 tracking-wide ${feature.colorClass}`}>
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground">
                   {feature.description}
                 </p>
               </div>
@@ -82,11 +82,11 @@ const AboutSection = () => {
           </div>
 
           {/* Additional info */}
-          <div className="mt-16 text-center p-8 bg-background rounded-lg border border-primary/20">
-            <p className="text-lg mb-4">
+          <div className="mt-8 sm:mt-12 md:mt-16 text-center p-5 sm:p-6 md:p-8 bg-background rounded-lg border border-primary/20">
+            <p className="text-base sm:text-lg mb-3 sm:mb-4">
               Мы — эксперты НТВ в проекте «Чудо техники» (2018)
             </p>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Наша студия была представлена как образец профессионального подхода к пирсингу в России
             </p>
           </div>

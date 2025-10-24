@@ -84,14 +84,14 @@ export const EditableText = ({
           <Textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className={`${className} min-h-[100px]`}
+            className={`${className} min-h-[100px] text-base`}
             disabled={isSaving}
           />
         ) : (
           <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className={className}
+            className={`${className} text-base h-11`}
             disabled={isSaving}
           />
         )}
@@ -100,6 +100,7 @@ export const EditableText = ({
             size="sm"
             onClick={handleSave}
             disabled={isSaving}
+            className="touch-manipulation h-10"
           >
             <Check className="h-4 w-4 mr-1" />
             Сохранить
@@ -109,6 +110,7 @@ export const EditableText = ({
             variant="outline"
             onClick={handleCancel}
             disabled={isSaving}
+            className="touch-manipulation h-10"
           >
             <X className="h-4 w-4 mr-1" />
             Отмена
@@ -119,15 +121,15 @@ export const EditableText = ({
   }
 
   return (
-    <div className="relative group inline-flex items-center gap-2">
+    <div className="relative group inline-flex items-center gap-1.5 sm:gap-2">
       <Component className={className}>{value}</Component>
       <Button
         size="sm"
         variant="ghost"
-        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 h-auto"
+        className="opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity p-1 h-auto touch-manipulation"
         onClick={() => setIsEditing(true)}
       >
-        <Pencil className="h-4 w-4 text-primary" />
+        <Pencil className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
       </Button>
     </div>
   );
