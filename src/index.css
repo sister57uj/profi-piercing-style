@@ -39,21 +39,16 @@ All colors MUST be HSL.
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Admin mode background indicator */
-  .admin-mode {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(45 20% 95%) 100%);
-    min-height: 100vh;
-  }
-
-  .dark .admin-mode {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(45 15% 12%) 100%);
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
