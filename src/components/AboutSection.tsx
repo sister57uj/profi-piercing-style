@@ -33,10 +33,10 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-card" id="about">
+    <section className="py-8 sm:py-12 md:py-16 bg-card" id="about">
       <div className="container mx-auto px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12 animate-fade-in">
             <EditableText
               initialValue={aboutTitle}
               onSave={setAboutTitle}
@@ -44,7 +44,7 @@ const AboutSection = () => {
               section="about"
               contentKey="title"
               as="h2"
-              className="text-3xl sm:text-4xl md:text-5xl font-bebas mb-3 sm:mb-4"
+              className="text-2xl sm:text-3xl md:text-4xl font-bebas mb-2 sm:mb-3"
             />
             <EditableText
               initialValue={aboutDescription}
@@ -54,26 +54,26 @@ const AboutSection = () => {
               contentKey="description"
               multiline
               as="p"
-              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4"
+              className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
               <div
                 key={feature.title}
-                className="p-5 sm:p-6 md:p-8 rounded-lg bg-card/50 border border-primary/30 hover:border-primary/60 hover-glow animate-fade-in"
+                className="p-4 sm:p-5 md:p-6 rounded-lg bg-card/50 border border-primary/30 hover:border-primary/60 hover-glow animate-fade-in"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="mb-3 sm:mb-4">
-                  <Icon className={`h-10 w-10 sm:h-12 sm:w-12 ${feature.colorClass}`} />
+                <div className="mb-2 sm:mb-3">
+                  <Icon className={`h-8 w-8 sm:h-10 sm:w-10 ${feature.colorClass}`} />
                 </div>
-                <h3 className={`text-xl sm:text-2xl font-bebas mb-2 sm:mb-3 tracking-wide ${feature.colorClass}`}>
+                <h3 className={`text-lg sm:text-xl font-bebas mb-1 sm:mb-2 tracking-wide ${feature.colorClass}`}>
                   {feature.title}
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   {feature.description}
                 </p>
               </div>
@@ -82,11 +82,11 @@ const AboutSection = () => {
           </div>
 
           {/* Additional info */}
-          <div className="mt-8 sm:mt-12 md:mt-16 text-center p-5 sm:p-6 md:p-8 bg-background rounded-lg border border-primary/20">
-            <p className="text-base sm:text-lg mb-3 sm:mb-4">
+          <div className="mt-6 sm:mt-8 md:mt-12 text-center p-4 sm:p-5 md:p-6 bg-background rounded-lg border border-primary/20">
+            <p className="text-sm sm:text-base mb-2 sm:mb-3">
               Мы — эксперты НТВ в проекте «Чудо техники» (2018)
             </p>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Наша студия была представлена как образец профессионального подхода к пирсингу в России
             </p>
           </div>
