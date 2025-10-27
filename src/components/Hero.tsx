@@ -50,7 +50,7 @@ const Hero = () => {
               />
             </div>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-display font-bold text-foreground leading-[1.1] break-words px-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-display font-bold text-foreground leading-[1.1] break-words px-4">
               <EditableText
                 initialValue={title}
                 onSave={setTitle}
@@ -73,35 +73,35 @@ const Hero = () => {
           </div>
           
           {/* Medical standards badges */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-6 sm:pt-7 md:pt-8 max-w-3xl mx-auto px-4 sm:px-6">
-            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 md:p-6 hover:border-primary/50 transition-all hover-lift">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-4 sm:pt-5 md:pt-6 max-w-3xl mx-auto px-2 sm:px-4">
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-foreground font-semibold text-sm sm:text-base md:text-lg mb-1">Стерильность</p>
-              <p className="text-muted-foreground text-xs sm:text-xs md:text-sm">Медицинские стандарты</p>
+              <p className="text-foreground font-semibold text-xs sm:text-sm mb-0.5">Стерильность</p>
+              <p className="text-muted-foreground text-[10px] sm:text-xs">Медицинские стандарты</p>
             </div>
             
-            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 md:p-6 hover:border-primary/50 transition-all hover-lift">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                 </svg>
               </div>
-              <p className="text-foreground font-semibold text-sm sm:text-base md:text-lg mb-1">Безопасность</p>
-              <p className="text-muted-foreground text-xs sm:text-xs md:text-sm">Сертифицированные мастера</p>
+              <p className="text-foreground font-semibold text-xs sm:text-sm mb-0.5">Безопасность</p>
+              <p className="text-muted-foreground text-[10px] sm:text-xs">Сертифицированные мастера</p>
             </div>
             
-            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 md:p-6 hover:border-primary/50 transition-all hover-lift">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
-              <p className="text-foreground font-semibold text-sm sm:text-base md:text-lg mb-1">Красота</p>
-              <p className="text-muted-foreground text-xs sm:text-xs md:text-sm">Индивидуальный подход</p>
+              <p className="text-foreground font-semibold text-xs sm:text-sm mb-0.5">Красота</p>
+              <p className="text-muted-foreground text-[10px] sm:text-xs">Индивидуальный подход</p>
             </div>
           </div>
           

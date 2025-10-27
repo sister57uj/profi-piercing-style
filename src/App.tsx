@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AdminProvider } from "./contexts/AdminContext";
+import { AdminProvider, useAdmin } from "./contexts/AdminContext";
 import ScrollingBackground from "./components/ScrollingBackground";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -26,26 +26,36 @@ const ScrollToTop = () => {
   return null;
 };
 
+const AppContent = () => {
+  const { isAdmin } = useAdmin();
+  
+  return (
+    <div className={isAdmin ? "admin-mode" : ""}>
+      <ScrollingBackground />
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/profi-admin-2025" element={<AuthPage />} />
+          <Route path="/admin-logs" element={<AdminPanel />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AdminProvider>
-        <ScrollingBackground />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/profi-admin-2025" element={<AuthPage />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <AppContent />
       </AdminProvider>
     </TooltipProvider>
   </QueryClientProvider>
