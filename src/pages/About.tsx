@@ -1,21 +1,52 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
-import { Award, Heart, Shield, TrendingUp, CheckCircle } from "lucide-react";
-import ekaterina from "@/assets/ekaterina-vasina.jpg";
+import { Award, Heart, Shield, TrendingUp, CheckCircle, Pencil, Trash2, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
+import { EmployeeEditor } from "@/components/admin/EmployeeEditor";
 import { supabase } from "@/integrations/supabase/client";
+import { useAdmin } from "@/contexts/AdminContext";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+
+interface Employee {
+  id: string;
+  first_name: string;
+  last_name: string;
+  description: string | null;
+  education: string | null;
+  experience: string | null;
+  photo_url: string | null;
+  sort_order: number;
+}
 
 const About = () => {
+  const { isAdmin } = useAdmin();
   const [pageTitle, setPageTitle] = useState("Наши сотрудники");
   const [historyTitle, setHistoryTitle] = useState("Наша история");
   const [historyText1, setHistoryText1] = useState("С 2017 года студия «Пирсинг Профи» создает безопасный и стильный пирсинг в Москве. Мы начали с небольшой студии и искренней любви к своему делу, и за годы работы заслужили доверие сотен клиентов.");
   const [historyText2, setHistoryText2] = useState("В 2018 году наша студия была представлена в программе НТВ «Чудо техники» как образец профессионального подхода к пирсингу в России. Это признание стало подтверждением нашего профессионализма и ответственного отношения к работе.");
   const [historyText3, setHistoryText3] = useState("Сегодня мы продолжаем совершенствоваться, следим за мировыми трендами в пирсинге и используем только проверенные методы стерилизации и лучшие материалы.");
+  
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [deletingEmployeeId, setDeletingEmployeeId] = useState<string | null>(null);
 
   useEffect(() => {
     loadContent();
+    loadEmployees();
   }, []);
 
   const loadContent = async () => {
@@ -34,6 +65,49 @@ const About = () => {
       });
     }
   };
+
+  const loadEmployees = async () => {
+    const { data, error } = await supabase
+      .from('employees')
+      .select('*')
+      .order('sort_order', { ascending: true });
+
+    if (error) {
+      console.error('Error loading employees:', error);
+      toast.error('Ошибка при загрузке сотрудников');
+    } else if (data) {
+      setEmployees(data);
+    }
+  };
+
+  const handleAddEmployee = () => {
+    setEditingEmployee(null);
+    setIsEditorOpen(true);
+  };
+
+  const handleEditEmployee = (employee: Employee) => {
+    setEditingEmployee(employee);
+    setIsEditorOpen(true);
+  };
+
+  const handleDeleteEmployee = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('employees')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast.success('Сотрудник удален');
+      loadEmployees();
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+      toast.error('Ошибка при удалении');
+    } finally {
+      setDeletingEmployeeId(null);
+    }
+  };
   return (
     <div className="min-h-screen">
       <Header />
@@ -42,56 +116,81 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             {/* Наши сотрудники */}
             <div className="mb-16 animate-fade-in">
-              <EditableText
-                initialValue={pageTitle}
-                onSave={setPageTitle}
-                page="about"
-                section="team"
-                contentKey="page_title"
-                as="h2"
-                className="text-4xl md:text-5xl font-display font-bold mb-8 text-center"
-              />
+              <div className="flex items-center justify-between mb-8">
+                <EditableText
+                  initialValue={pageTitle}
+                  onSave={setPageTitle}
+                  page="about"
+                  section="team"
+                  contentKey="page_title"
+                  as="h2"
+                  className="text-4xl md:text-5xl font-display font-bold text-center flex-1"
+                />
+                {isAdmin && (
+                  <Button onClick={handleAddEmployee} size="sm" className="ml-4">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Добавить
+                  </Button>
+                )}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Екатерина Васина */}
-                <div className="bg-card rounded-lg border border-primary/20 overflow-hidden hover-lift">
-                  <div className="aspect-[3/4] relative overflow-hidden">
-                    <img 
-                      src={ekaterina} 
-                      alt="Екатерина Васина - мастер пирсинга"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-primary">Екатерина Васина</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Эксперт по пирсингу с медицинским образованием. Работает с 2017 года.
-                    </p>
-                    <div className="space-y-1 text-xs text-muted-foreground">
-                      <p><strong className="text-foreground">Образование:</strong> Медицинское, сертификация по пирсингу</p>
-                      <p><strong className="text-foreground">Опыт:</strong> Более 7 лет</p>
+                {employees.map((employee) => (
+                  <div key={employee.id} className="bg-card rounded-lg border border-primary/20 overflow-hidden hover-lift relative group">
+                    <div className="aspect-[3/4] relative overflow-hidden">
+                      {employee.photo_url ? (
+                        <img 
+                          src={employee.photo_url} 
+                          alt={`${employee.first_name} ${employee.last_name}`}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                          <span className="text-6xl text-muted-foreground">
+                            {employee.first_name[0]}{employee.last_name[0]}
+                          </span>
+                        </div>
+                      )}
                     </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2 text-primary">
+                        {employee.first_name} {employee.last_name}
+                      </h3>
+                      {employee.description && (
+                        <p className="text-sm text-muted-foreground mb-3">
+                          {employee.description}
+                        </p>
+                      )}
+                      <div className="space-y-1 text-xs text-muted-foreground">
+                        {employee.education && (
+                          <p><strong className="text-foreground">Образование:</strong> {employee.education}</p>
+                        )}
+                        {employee.experience && (
+                          <p><strong className="text-foreground">Опыт:</strong> {employee.experience}</p>
+                        )}
+                      </div>
+                    </div>
+                    {isAdmin && (
+                      <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => handleEditEmployee(employee)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => setDeletingEmployeeId(employee.id)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
                   </div>
-                </div>
-
-                {/* Пустая карточка 1 */}
-                <div className="bg-card rounded-lg border border-dashed border-primary/40 overflow-hidden hover-lift flex flex-col items-center justify-center p-8 min-h-[400px]">
-                  <div className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/40 flex items-center justify-center mb-4">
-                    <svg className="w-12 h-12 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                  </div>
-                  <p className="text-muted-foreground text-center">Скоро появится новый мастер</p>
-                </div>
-
-                {/* Пустая карточка 2 */}
-                <div className="bg-card rounded-lg border border-dashed border-primary/40 overflow-hidden hover-lift flex flex-col items-center justify-center p-8 min-h-[400px]">
-                  <div className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/40 flex items-center justify-center mb-4">
-                    <svg className="w-12 h-12 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                  </div>
-                  <p className="text-muted-foreground text-center">Скоро появится новый мастер</p>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -250,6 +349,38 @@ const About = () => {
       </main>
       <Footer />
       <AdminHelper />
+      
+      {/* Employee Editor Dialog */}
+      <EmployeeEditor
+        employee={editingEmployee}
+        isOpen={isEditorOpen}
+        onClose={() => {
+          setIsEditorOpen(false);
+          setEditingEmployee(null);
+        }}
+        onUpdate={loadEmployees}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={!!deletingEmployeeId} onOpenChange={() => setDeletingEmployeeId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Удалить сотрудника?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Это действие нельзя отменить. Карточка сотрудника будет удалена навсегда.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deletingEmployeeId && handleDeleteEmployee(deletingEmployeeId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Удалить
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
