@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Medical Professional Theme - Dark Mode */
-    --background: 220 20% 8%;
+    --background: 215 25% 15%;
     --foreground: 210 20% 98%;
     --card: 220 18% 12%;
     --card-foreground: 210 20% 98%;

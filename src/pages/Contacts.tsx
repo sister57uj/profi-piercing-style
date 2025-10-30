@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
+import { EditableLink } from "@/components/admin/EditableLink";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -16,6 +17,20 @@ const Contacts = () => {
   const [pageDescription, setPageDescription] = useState("Свяжитесь с нами удобным способом");
   const [showPhoneDialog, setShowPhoneDialog] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  const [address1, setAddress1] = useState("ул. Рязанский проспект 30/15");
+  const [address2, setAddress2] = useState("Москва, м. Окская");
+  const [phone, setPhone] = useState("+7 985 850-48-01");
+  const [phoneNote, setPhoneNote] = useState("WhatsApp / Telegram");
+  const [email1, setEmail1] = useState("Studio.p.t@yandex.ru");
+  const [email2, setEmail2] = useState("Ekaterina.v_1996@mail.ru");
+  const [hours1, setHours1] = useState("Понедельник — Воскресенье");
+  const [hours2, setHours2] = useState("12:00 — 21:00");
+  const [hoursNote, setHoursNote] = useState("Только по записи");
+  
+  const [instagramUrl, setInstagramUrl] = useState("https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==");
+  const [telegramUrl, setTelegramUrl] = useState("https://t.me/piercing_prof");
+  const [vkUrl, setVkUrl] = useState("https://vk.com/piercing_profi24");
 
   useEffect(() => {
     loadContent();
@@ -35,6 +50,18 @@ const Contacts = () => {
       data.forEach(item => {
         if (item.content_key === 'page_title') setPageTitle(item.content_value);
         if (item.content_key === 'page_description') setPageDescription(item.content_value);
+        if (item.content_key === 'address_1') setAddress1(item.content_value);
+        if (item.content_key === 'address_2') setAddress2(item.content_value);
+        if (item.content_key === 'phone') setPhone(item.content_value);
+        if (item.content_key === 'phone_note') setPhoneNote(item.content_value);
+        if (item.content_key === 'email_1') setEmail1(item.content_value);
+        if (item.content_key === 'email_2') setEmail2(item.content_value);
+        if (item.content_key === 'hours_1') setHours1(item.content_value);
+        if (item.content_key === 'hours_2') setHours2(item.content_value);
+        if (item.content_key === 'hours_note') setHoursNote(item.content_value);
+        if (item.content_key === 'instagram_url') setInstagramUrl(item.content_value);
+        if (item.content_key === 'telegram_url') setTelegramUrl(item.content_value);
+        if (item.content_key === 'vk_url') setVkUrl(item.content_value);
       });
     }
   };
@@ -87,12 +114,26 @@ const Contacts = () => {
                       <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
                         <MapPin className="h-6 w-6 text-primary" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold text-lg mb-1">Адрес</h3>
-                        <p className="text-muted-foreground">
-                          ул. Рязанский проспект 30/15<br />
-                          Москва, м. Окская
-                        </p>
+                        <div className="text-muted-foreground">
+                          <EditableText
+                            initialValue={address1}
+                            onSave={setAddress1}
+                            page="contacts"
+                            section="info"
+                            contentKey="address_1"
+                            as="p"
+                          />
+                          <EditableText
+                            initialValue={address2}
+                            onSave={setAddress2}
+                            page="contacts"
+                            section="info"
+                            contentKey="address_2"
+                            as="p"
+                          />
+                        </div>
                       </div>
                     </div>
 
@@ -100,14 +141,31 @@ const Contacts = () => {
                       <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
                         <Phone className="h-6 w-6 text-primary" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold text-lg mb-1">Телефон</h3>
-                        <p className="text-muted-foreground">
-                          <a href="tel:+79858504801" className="hover:text-primary transition-colors">
-                            +7 985 850-48-01
-                          </a><br />
-                          <span className="text-sm">WhatsApp / Telegram</span>
-                        </p>
+                        <div className="text-muted-foreground">
+                          <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-primary transition-colors">
+                            <EditableText
+                              initialValue={phone}
+                              onSave={setPhone}
+                              page="contacts"
+                              section="info"
+                              contentKey="phone"
+                              as="span"
+                            />
+                          </a>
+                          <br />
+                          <span className="text-sm">
+                            <EditableText
+                              initialValue={phoneNote}
+                              onSave={setPhoneNote}
+                              page="contacts"
+                              section="info"
+                              contentKey="phone_note"
+                              as="span"
+                            />
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -115,16 +173,31 @@ const Contacts = () => {
                       <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center flex-shrink-0">
                         <Mail className="h-6 w-6 text-accent" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold text-lg mb-1">Email</h3>
-                        <p className="text-muted-foreground">
-                          <a href="mailto:Studio.p.t@yandex.ru" className="hover:text-primary transition-colors">
-                            Studio.p.t@yandex.ru
-                          </a><br />
-                          <a href="mailto:Ekaterina.v_1996@mail.ru" className="hover:text-primary transition-colors">
-                            Ekaterina.v_1996@mail.ru
+                        <div className="text-muted-foreground">
+                          <a href={`mailto:${email1}`} className="hover:text-primary transition-colors">
+                            <EditableText
+                              initialValue={email1}
+                              onSave={setEmail1}
+                              page="contacts"
+                              section="info"
+                              contentKey="email_1"
+                              as="span"
+                            />
                           </a>
-                        </p>
+                          <br />
+                          <a href={`mailto:${email2}`} className="hover:text-primary transition-colors">
+                            <EditableText
+                              initialValue={email2}
+                              onSave={setEmail2}
+                              page="contacts"
+                              section="info"
+                              contentKey="email_2"
+                              as="span"
+                            />
+                          </a>
+                        </div>
                       </div>
                     </div>
 
@@ -132,13 +205,36 @@ const Contacts = () => {
                       <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
                         <Clock className="h-6 w-6 text-primary" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold text-lg mb-1">Часы работы</h3>
-                        <p className="text-muted-foreground">
-                          Понедельник — Воскресенье<br />
-                          12:00 — 21:00<br />
-                          <span className="text-sm text-primary">Только по записи</span>
-                        </p>
+                        <div className="text-muted-foreground">
+                          <EditableText
+                            initialValue={hours1}
+                            onSave={setHours1}
+                            page="contacts"
+                            section="info"
+                            contentKey="hours_1"
+                            as="p"
+                          />
+                          <EditableText
+                            initialValue={hours2}
+                            onSave={setHours2}
+                            page="contacts"
+                            section="info"
+                            contentKey="hours_2"
+                            as="p"
+                          />
+                          <span className="text-sm text-primary">
+                            <EditableText
+                              initialValue={hoursNote}
+                              onSave={setHoursNote}
+                              page="contacts"
+                              section="info"
+                              contentKey="hours_note"
+                              as="span"
+                            />
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -149,7 +245,7 @@ const Contacts = () => {
                   <h3 className="font-semibold text-lg mb-4">Мы в соцсетях</h3>
                   <div className="flex gap-4">
                     <a
-                      href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw=="
+                      href={instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-12 w-12 hover:scale-110 transition-all"
@@ -157,7 +253,7 @@ const Contacts = () => {
                       <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
                     </a>
                     <a
-                      href="https://t.me/piercing_prof"
+                      href={telegramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-12 w-12 hover:scale-110 transition-all"
@@ -165,13 +261,42 @@ const Contacts = () => {
                       <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
                     </a>
                     <a
-                      href="https://vk.com/piercing_profi24"
+                      href={vkUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-12 w-12 hover:scale-110 transition-all"
                     >
                       <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
                     </a>
+                  </div>
+                  <div className="mt-2 text-xs text-muted-foreground space-y-1">
+                    <EditableText
+                      initialValue={instagramUrl}
+                      onSave={setInstagramUrl}
+                      page="contacts"
+                      section="social"
+                      contentKey="instagram_url"
+                      as="p"
+                      className="text-xs"
+                    />
+                    <EditableText
+                      initialValue={telegramUrl}
+                      onSave={setTelegramUrl}
+                      page="contacts"
+                      section="social"
+                      contentKey="telegram_url"
+                      as="p"
+                      className="text-xs"
+                    />
+                    <EditableText
+                      initialValue={vkUrl}
+                      onSave={setVkUrl}
+                      page="contacts"
+                      section="social"
+                      contentKey="vk_url"
+                      as="p"
+                      className="text-xs"
+                    />
                   </div>
                 </div>
               </div>

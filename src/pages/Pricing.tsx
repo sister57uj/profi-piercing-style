@@ -4,9 +4,11 @@ import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { EditableText } from "@/components/admin/EditableText";
 import { EditableLink } from "@/components/admin/EditableLink";
+import { PricingServiceEditor, AddServiceButton } from "@/components/admin/PricingServiceEditor";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Info, Phone } from "lucide-react";
+import { useAdmin } from "@/contexts/AdminContext";
 import {
   Dialog,
   DialogContent,
@@ -21,9 +23,12 @@ const Pricing = () => {
   const [promotionsDialogOpen, setPromotionsDialogOpen] = useState(false);
   const [pageTitle, setPageTitle] = useState("Прайс-лист");
   const [pageDescription, setPageDescription] = useState("Прозрачные цены на все виды пирсинга. Стоимость указана без учета украшений");
+  const [services, setServices] = useState<any[]>([]);
+  const { isAdmin } = useAdmin();
 
   useEffect(() => {
     loadContent();
+    loadServices();
   }, []);
 
   const loadContent = async () => {
@@ -40,54 +45,25 @@ const Pricing = () => {
     }
   };
 
-  const prices = [
-    {
-      category: "Пирсинг носа",
-      items: [
-        { name: "Крыло носа", price: 1800 },
-        { name: "Септум", price: 2000 },
-        { name: "Nasallang", price: 2500 },
-        { name: "Бридж", price: 1600 }
-      ]
-    },
-    {
-      category: "Пирсинг лица",
-      items: [
-        { name: "Пирсинг брови", price: 1600 },
-        { name: "Anti-eyebrow", price: 2000 },
-        { name: "Пирсинг губы", price: 1600 },
-        { name: "Щека (димплы)", price: 2000 }
-      ]
-    },
-    {
-      category: "Пирсинг ушей",
-      items: [
-        { name: "Мочка уха", price: 1000 },
-        { name: "Хеликс", price: 1500 },
-        { name: "Индастриал", price: 2200 },
-        { name: "Трагус", price: 1600 },
-        { name: "Дэйс", price: 1800 },
-        { name: "Рук", price: 1800 }
-      ]
-    },
-    {
-      category: "Пирсинг тела",
-      items: [
-        { name: "Пупок", price: 2000 },
-        { name: "Микродермал (1 шт)", price: 2500 },
-        { name: "Соски (женский)", price: 2500 },
-        { name: "Соски (мужской)", price: 2000 }
-      ]
-    },
-    {
-      category: "Дополнительные услуги",
-      items: [
-        { name: "Смена украшения", price: 500 },
-        { name: "Снятие пирсинга", price: 300 },
-        { name: "Консультация", price: 0 }
-      ]
+  const loadServices = async () => {
+    const { data, error } = await supabase
+      .from('pricing_services')
+      .select('*')
+      .order('category', { ascending: true })
+      .order('sort_order', { ascending: true });
+
+    if (data) {
+      setServices(data);
     }
-  ];
+  };
+
+  const groupedServices = services.reduce((acc, service) => {
+    if (!acc[service.category]) {
+      acc[service.category] = [];
+    }
+    acc[service.category].push(service);
+    return acc;
+  }, {} as Record<string, any[]>);
 
   return (
     <div className="min-h-screen">
@@ -136,29 +112,44 @@ const Pricing = () => {
 
             {/* Prices */}
             <div className="space-y-12">
-              {prices.map((category, index) => (
+              {Object.entries(groupedServices).map(([category, items]: [string, any[]], index) => (
                 <div
-                  key={category.category}
+                  key={category}
                   className="animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <h2 className="text-3xl font-display font-semibold mb-6 text-primary">
-                    {category.category}
+                    {category}
                   </h2>
                   <div className="bg-card rounded-lg border border-border overflow-hidden">
                     <div className="divide-y divide-border">
-                      {category.items.map((item) => (
-                        <div
-                          key={item.name}
-                          className="flex justify-between items-center p-4 hover:bg-background transition-colors"
-                        >
-                          <span className="font-medium">{item.name}</span>
-                          <span className="text-lg font-semibold text-primary">
-                            {item.price === 0 ? 'Бесплатно' : `${item.price} ₽`}
-                          </span>
-                        </div>
+                      {items.map((service) => (
+                        isAdmin ? (
+                          <PricingServiceEditor
+                            key={service.id}
+                            service={service}
+                            category={category}
+                            onSave={loadServices}
+                            onDelete={loadServices}
+                          />
+                        ) : (
+                          <div
+                            key={service.id}
+                            className="flex justify-between items-center p-4 hover:bg-background transition-colors"
+                          >
+                            <span className="font-medium">{service.name}</span>
+                            <span className="text-lg font-semibold text-primary">
+                              {service.price === 0 ? 'Бесплатно' : `${service.price} ₽`}
+                            </span>
+                          </div>
+                        )
                       ))}
                     </div>
+                    {isAdmin && (
+                      <div className="p-4 bg-background/50">
+                        <AddServiceButton category={category} onSave={loadServices} />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
