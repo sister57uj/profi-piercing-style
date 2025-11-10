@@ -53,6 +53,36 @@ export type Database = {
         }
         Relationships: []
       }
+      jewelry_items: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          price_from: number
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          price_from: number
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          price_from?: number
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       portfolio_images: {
         Row: {
           created_at: string

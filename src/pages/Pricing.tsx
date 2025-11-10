@@ -5,6 +5,7 @@ import { AdminHelper } from "@/components/admin/AdminHelper";
 import { EditableText } from "@/components/admin/EditableText";
 import { EditableLink } from "@/components/admin/EditableLink";
 import { PricingServiceEditor, AddServiceButton } from "@/components/admin/PricingServiceEditor";
+import { JewelryItemEditor, AddJewelryButton } from "@/components/admin/JewelryItemEditor";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Info, Phone } from "lucide-react";
@@ -24,11 +25,17 @@ const Pricing = () => {
   const [pageTitle, setPageTitle] = useState("Прайс-лист");
   const [pageDescription, setPageDescription] = useState("Прозрачные цены на все виды пирсинга. Стоимость указана без учета украшений");
   const [services, setServices] = useState<any[]>([]);
+  const [jewelryItems, setJewelryItems] = useState<any[]>([]);
+  const [promotionsTitle, setPromotionsTitle] = useState("Следите за акциями!");
+  const [promotionsDescription, setPromotionsDescription] = useState("Регулярно проводим специальные предложения и ищем моделей для портфолио со скидками до 50%");
+  const [questionsTitle, setQuestionsTitle] = useState("Остались вопросы по ценам?");
+  const [questionsDescription, setQuestionsDescription] = useState("Свяжитесь с нами для подробной консультации");
   const { isAdmin } = useAdmin();
 
   useEffect(() => {
     loadContent();
     loadServices();
+    loadJewelryItems();
   }, []);
 
   const loadContent = async () => {
@@ -41,6 +48,10 @@ const Pricing = () => {
       data.forEach(item => {
         if (item.content_key === 'page_title') setPageTitle(item.content_value);
         if (item.content_key === 'page_description') setPageDescription(item.content_value);
+        if (item.content_key === 'promotions_title') setPromotionsTitle(item.content_value);
+        if (item.content_key === 'promotions_description') setPromotionsDescription(item.content_value);
+        if (item.content_key === 'questions_title') setQuestionsTitle(item.content_value);
+        if (item.content_key === 'questions_description') setQuestionsDescription(item.content_value);
       });
     }
   };
@@ -54,6 +65,17 @@ const Pricing = () => {
 
     if (data) {
       setServices(data);
+    }
+  };
+
+  const loadJewelryItems = async () => {
+    const { data } = await supabase
+      .from('jewelry_items')
+      .select('*')
+      .order('sort_order', { ascending: true });
+
+    if (data) {
+      setJewelryItems(data);
     }
   };
 
@@ -161,38 +183,47 @@ const Pricing = () => {
                 Украшения
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Базовые</h3>
-                  <p className="text-3xl font-semibold mb-2">от 500 ₽</p>
-                  <p className="text-sm text-muted-foreground">
-                    Качественная хирургическая сталь, титан
-                  </p>
-                </div>
-                
-                <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Премиум</h3>
-                  <p className="text-3xl font-semibold mb-2">от 1500 ₽</p>
-                  <p className="text-sm text-muted-foreground">
-                    Золото, серебро, биофлекс, с камнями
-                  </p>
-                </div>
-                
-                <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Эксклюзив</h3>
-                  <p className="text-3xl font-semibold mb-2">от 3000 ₽</p>
-                  <p className="text-sm text-muted-foreground">
-                    Дизайнерские украшения, драгоценные камни
-                  </p>
-                </div>
+                {jewelryItems.map((item) => (
+                  isAdmin ? (
+                    <JewelryItemEditor
+                      key={item.id}
+                      item={item}
+                      onSave={loadJewelryItems}
+                      onDelete={loadJewelryItems}
+                    />
+                  ) : (
+                    <div key={item.id} className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
+                      <h3 className="text-xl font-semibold mb-3 text-primary">{item.title}</h3>
+                      <p className="text-3xl font-semibold mb-2">от {item.price_from} ₽</p>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                    </div>
+                  )
+                ))}
+                {isAdmin && <AddJewelryButton onSave={loadJewelryItems} />}
               </div>
             </div>
 
             {/* Promotions reminder */}
             <div className="bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 p-8 rounded-lg border border-primary/30 text-center mb-12">
-              <h3 className="text-2xl font-semibold mb-4">Следите за акциями!</h3>
-              <p className="text-muted-foreground mb-6">
-                Регулярно проводим специальные предложения и ищем моделей для портфолио со скидками до 50%
-              </p>
+              <EditableText
+                initialValue={promotionsTitle}
+                onSave={setPromotionsTitle}
+                page="pricing"
+                section="promotions"
+                contentKey="promotions_title"
+                as="h3"
+                className="text-2xl font-semibold mb-4"
+              />
+              <EditableText
+                initialValue={promotionsDescription}
+                onSave={setPromotionsDescription}
+                page="pricing"
+                section="promotions"
+                contentKey="promotions_description"
+                multiline
+                as="p"
+                className="text-muted-foreground mb-6"
+              />
               <Dialog open={promotionsDialogOpen} onOpenChange={setPromotionsDialogOpen}>
                 <DialogTrigger asChild>
                   <Button
@@ -214,12 +245,25 @@ const Pricing = () => {
 
             {/* CTA */}
             <div className="text-center animate-fade-in">
-              <h3 className="text-2xl font-semibold mb-4">
-                Остались вопросы по ценам?
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Свяжитесь с нами для подробной консультации
-              </p>
+              <EditableText
+                initialValue={questionsTitle}
+                onSave={setQuestionsTitle}
+                page="pricing"
+                section="cta"
+                contentKey="questions_title"
+                as="h3"
+                className="text-2xl font-semibold mb-4"
+              />
+              <EditableText
+                initialValue={questionsDescription}
+                onSave={setQuestionsDescription}
+                page="pricing"
+                section="cta"
+                contentKey="questions_description"
+                multiline
+                as="p"
+                className="text-muted-foreground mb-6"
+              />
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <EditableLink
                   initialText="Записаться"
