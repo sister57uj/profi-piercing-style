@@ -22,7 +22,7 @@ const AuthPage = () => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate('/admin-panel');
+        navigate('/');
       }
     };
     checkAuth();
@@ -42,9 +42,9 @@ const AuthPage = () => {
 
       toast({
         title: "Успешный вход",
-        description: "Добро пожаловать в админ-панель",
+        description: "Добро пожаловать",
       });
-      navigate('/admin-panel');
+      navigate('/');
     } catch (error: any) {
       toast({
         variant: "destructive",
