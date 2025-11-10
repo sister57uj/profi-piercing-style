@@ -5,6 +5,7 @@ import { Award, Heart, Shield, TrendingUp, CheckCircle, Pencil, Trash2, Plus } f
 import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
 import { EmployeeEditor } from "@/components/admin/EmployeeEditor";
+import { ValueCardEditor } from "@/components/admin/ValueCardEditor";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdmin } from "@/contexts/AdminContext";
 import { Button } from "@/components/ui/button";
@@ -39,6 +40,16 @@ const About = () => {
   const [historyText2, setHistoryText2] = useState("В 2018 году наша студия была представлена в программе НТВ «Чудо техники» как образец профессионального подхода к пирсингу в России. Это признание стало подтверждением нашего профессионализма и ответственного отношения к работе.");
   const [historyText3, setHistoryText3] = useState("Сегодня мы продолжаем совершенствоваться, следим за мировыми трендами в пирсинге и используем только проверенные методы стерилизации и лучшие материалы.");
   
+  const [valuesTitle, setValuesTitle] = useState("Наши ценности");
+  const [value1Title, setValue1Title] = useState("Безопасность");
+  const [value1Desc, setValue1Desc] = useState("Химическая и термическая стерилизация всех инструментов. Одноразовые иглы и перчатки, которые мы вскрываем при вас.");
+  const [value2Title, setValue2Title] = useState("Профессионализм");
+  const [value2Desc, setValue2Desc] = useState("Мастера с медицинским образованием и сертификацией. Постоянное обучение и следование мировым стандартам.");
+  const [value3Title, setValue3Title] = useState("Индивидуальность");
+  const [value3Desc, setValue3Desc] = useState("Мы подбираем украшения и расположение пирсинга индивидуально, учитывая анатомию и пожелания каждого клиента.");
+  const [value4Title, setValue4Title] = useState("Развитие");
+  const [value4Desc, setValue4Desc] = useState("Мы следим за трендами, внедряем новые техники и регулярно повышаем квалификацию для лучшего обслуживания клиентов.");
+  
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -62,6 +73,15 @@ const About = () => {
         if (item.content_key === 'history_text_1') setHistoryText1(item.content_value);
         if (item.content_key === 'history_text_2') setHistoryText2(item.content_value);
         if (item.content_key === 'history_text_3') setHistoryText3(item.content_value);
+        if (item.content_key === 'values_title') setValuesTitle(item.content_value);
+        if (item.content_key === 'value1_title') setValue1Title(item.content_value);
+        if (item.content_key === 'value1_desc') setValue1Desc(item.content_value);
+        if (item.content_key === 'value2_title') setValue2Title(item.content_value);
+        if (item.content_key === 'value2_desc') setValue2Desc(item.content_value);
+        if (item.content_key === 'value3_title') setValue3Title(item.content_value);
+        if (item.content_key === 'value3_desc') setValue3Desc(item.content_value);
+        if (item.content_key === 'value4_title') setValue4Title(item.content_value);
+        if (item.content_key === 'value4_desc') setValue4Desc(item.content_value);
       });
     }
   };
@@ -240,45 +260,64 @@ const About = () => {
 
             {/* Ценности */}
             <div className="mb-16">
-              <h2 className="text-3xl font-display font-semibold mb-8 text-center">
-                Наши ценности
-              </h2>
+              <EditableText
+                initialValue={valuesTitle}
+                onSave={setValuesTitle}
+                page="about"
+                section="values"
+                contentKey="values_title"
+                as="h2"
+                className="text-3xl font-display font-semibold mb-8 text-center"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in">
-                  <Shield className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Безопасность</h3>
-                  <p className="text-muted-foreground">
-                    Химическая и термическая стерилизация всех инструментов. 
-                    Одноразовые иглы и перчатки, которые мы вскрываем при вас.
-                  </p>
-                </div>
-
-                <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                  <Award className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Профессионализм</h3>
-                  <p className="text-muted-foreground">
-                    Мастера с медицинским образованием и сертификацией. 
-                    Постоянное обучение и следование мировым стандартам.
-                  </p>
-                </div>
-
-                <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                  <Heart className="h-10 w-10 text-accent mb-4" />
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Индивидуальность</h3>
-                  <p className="text-muted-foreground">
-                    Мы подбираем украшения и расположение пирсинга индивидуально, 
-                    учитывая анатомию и пожелания каждого клиента.
-                  </p>
-                </div>
-
-                <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                  <TrendingUp className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Развитие</h3>
-                  <p className="text-muted-foreground">
-                    Мы следим за трендами, внедряем новые техники и регулярно 
-                    повышаем квалификацию для лучшего обслуживания клиентов.
-                  </p>
-                </div>
+                <ValueCardEditor
+                  icon={<Shield className="h-10 w-10 text-primary mb-4" />}
+                  title={value1Title}
+                  description={value1Desc}
+                  page="about"
+                  section="values"
+                  contentKey="value1"
+                  onSave={(title, desc) => {
+                    setValue1Title(title);
+                    setValue1Desc(desc);
+                  }}
+                />
+                <ValueCardEditor
+                  icon={<Award className="h-10 w-10 text-primary mb-4" />}
+                  title={value2Title}
+                  description={value2Desc}
+                  page="about"
+                  section="values"
+                  contentKey="value2"
+                  onSave={(title, desc) => {
+                    setValue2Title(title);
+                    setValue2Desc(desc);
+                  }}
+                />
+                <ValueCardEditor
+                  icon={<Heart className="h-10 w-10 text-accent mb-4" />}
+                  title={value3Title}
+                  description={value3Desc}
+                  page="about"
+                  section="values"
+                  contentKey="value3"
+                  onSave={(title, desc) => {
+                    setValue3Title(title);
+                    setValue3Desc(desc);
+                  }}
+                />
+                <ValueCardEditor
+                  icon={<TrendingUp className="h-10 w-10 text-primary mb-4" />}
+                  title={value4Title}
+                  description={value4Desc}
+                  page="about"
+                  section="values"
+                  contentKey="value4"
+                  onSave={(title, desc) => {
+                    setValue4Title(title);
+                    setValue4Desc(desc);
+                  }}
+                />
               </div>
             </div>
 
