@@ -175,6 +175,30 @@ export type Database = {
         }
         Relationships: []
       }
+      safety_guarantees: {
+        Row: {
+          created_at: string
+          id: string
+          sort_order: number
+          text: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          sort_order?: number
+          text: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          sort_order?: number
+          text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           content_key: string
@@ -223,6 +247,36 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      work_process_steps: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          sort_order: number
+          step_number: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          sort_order?: number
+          step_number: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          sort_order?: number
+          step_number?: number
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }

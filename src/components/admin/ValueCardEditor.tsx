@@ -70,7 +70,7 @@ export const ValueCardEditor = ({
 
   if (isEditing) {
     return (
-      <div className="bg-card p-6 rounded-lg border-2 border-primary">
+      <div className="bg-card p-6 rounded-lg border-2 border-primary animate-fade-in">
         <div className="mb-4">{icon}</div>
         <div className="space-y-3">
           <Input
