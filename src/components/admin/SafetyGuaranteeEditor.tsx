@@ -79,7 +79,7 @@ export const SafetyGuaranteeEditor = ({ guarantee, onUpdate }: SafetyGuaranteeEd
 
   if (isEditing) {
     return (
-      <div className="flex items-start gap-3 p-3 rounded-lg border-2 border-primary bg-card">
+      <div className="flex items-start gap-3 bg-card p-3 rounded-lg border-2 border-primary">
         <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
         <div className="flex-1 space-y-2">
           <Input
@@ -104,25 +104,25 @@ export const SafetyGuaranteeEditor = ({ guarantee, onUpdate }: SafetyGuaranteeEd
 
   return (
     <>
-      <div className="flex items-start gap-3 group relative p-2 rounded-lg hover:bg-accent/10 transition-colors">
+      <div className="flex items-start gap-3 group relative">
         <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
         <p className="text-muted-foreground flex-1">{guarantee.text}</p>
         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
-            size="sm"
-            variant="ghost"
             onClick={() => setIsEditing(true)}
+            variant="ghost"
+            size="sm"
             className="h-8 w-8 p-0"
           >
-            <Pencil className="h-3 w-3" />
+            <Pencil className="h-4 w-4" />
           </Button>
           <Button
-            size="sm"
-            variant="ghost"
             onClick={() => setShowDeleteDialog(true)}
+            variant="ghost"
+            size="sm"
             className="h-8 w-8 p-0 text-destructive hover:text-destructive"
           >
-            <Trash2 className="h-3 w-3" />
+            <Trash2 className="h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -132,7 +132,7 @@ export const SafetyGuaranteeEditor = ({ guarantee, onUpdate }: SafetyGuaranteeEd
           <AlertDialogHeader>
             <AlertDialogTitle>Удалить гарантию?</AlertDialogTitle>
             <AlertDialogDescription>
-              Это действие нельзя отменить. Гарантия будет удалена навсегда.
+              Это действие нельзя отменить.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

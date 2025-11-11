@@ -62,7 +62,7 @@ export const ValueCardEditor = ({
     return (
       <div className="bg-card p-6 rounded-lg border border-border hover-glow animate-fade-in">
         <div className="mb-4">{icon}</div>
-        <h3 className="text-xl font-semibold mb-3 text-primary">{title}</h3>
+        <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
         <p className="text-muted-foreground">{description}</p>
       </div>
     );
@@ -110,7 +110,7 @@ export const ValueCardEditor = ({
         <Pencil className="h-4 w-4" />
       </Button>
       <div className="mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-3 text-primary">{title}</h3>
+      <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
     </div>
   );

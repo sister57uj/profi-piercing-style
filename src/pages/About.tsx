@@ -80,18 +80,18 @@ const About = () => {
   const [deletingEmployeeId, setDeletingEmployeeId] = useState<string | null>(null);
 
   const [workProcessSteps, setWorkProcessSteps] = useState<WorkProcessStep[]>([]);
-  const [showAddStepDialog, setShowAddStepDialog] = useState(false);
-  const [newStepTitle, setNewStepTitle] = useState("");
-  const [newStepDescription, setNewStepDescription] = useState("");
-  
   const [safetyGuarantees, setSafetyGuarantees] = useState<SafetyGuarantee[]>([]);
-  const [showAddGuaranteeDialog, setShowAddGuaranteeDialog] = useState(false);
-  const [newGuaranteeText, setNewGuaranteeText] = useState("");
-  
   const [processTitle, setProcessTitle] = useState("Процесс работы");
   const [safetyTitle, setSafetyTitle] = useState("Гарантии безопасности");
   const [recognitionTitle, setRecognitionTitle] = useState("НТВ «Чудо техники» 2018");
   const [recognitionText, setRecognitionText] = useState("Наша студия была представлена как образец профессионального подхода к пирсингу в России");
+  
+  const [isAddingStep, setIsAddingStep] = useState(false);
+  const [newStepTitle, setNewStepTitle] = useState("");
+  const [newStepDescription, setNewStepDescription] = useState("");
+  
+  const [isAddingGuarantee, setIsAddingGuarantee] = useState(false);
+  const [newGuaranteeText, setNewGuaranteeText] = useState("");
 
   useEffect(() => {
     loadContent();
@@ -201,6 +201,63 @@ const About = () => {
     }
   };
 
+  const handleAddStep = async () => {
+    if (!newStepTitle.trim() || !newStepDescription.trim()) {
+      toast.error('Заполните все поля');
+      return;
+    }
+
+    try {
+      const maxStep = workProcessSteps.reduce((max, step) => Math.max(max, step.step_number), 0);
+      const { error } = await supabase
+        .from('work_process_steps')
+        .insert({
+          title: newStepTitle,
+          description: newStepDescription,
+          step_number: maxStep + 1,
+          sort_order: maxStep + 1
+        });
+
+      if (error) throw error;
+
+      toast.success('Шаг добавлен');
+      setIsAddingStep(false);
+      setNewStepTitle("");
+      setNewStepDescription("");
+      loadWorkProcessSteps();
+    } catch (error) {
+      console.error('Error adding step:', error);
+      toast.error('Ошибка при добавлении');
+    }
+  };
+
+  const handleAddGuarantee = async () => {
+    if (!newGuaranteeText.trim()) {
+      toast.error('Введите текст гарантии');
+      return;
+    }
+
+    try {
+      const maxOrder = safetyGuarantees.reduce((max, g) => Math.max(max, g.sort_order), 0);
+      const { error } = await supabase
+        .from('safety_guarantees')
+        .insert({
+          text: newGuaranteeText,
+          sort_order: maxOrder + 1
+        });
+
+      if (error) throw error;
+
+      toast.success('Гарантия добавлена');
+      setIsAddingGuarantee(false);
+      setNewGuaranteeText("");
+      loadSafetyGuarantees();
+    } catch (error) {
+      console.error('Error adding guarantee:', error);
+      toast.error('Ошибка при добавлении');
+    }
+  };
+
   const handleAddWorkProcessStep = async () => {
     if (!newStepTitle.trim() || !newStepDescription.trim()) {
       toast.error('Заполните все поля');
@@ -224,7 +281,7 @@ const About = () => {
       if (error) throw error;
 
       toast.success('Шаг добавлен');
-      setShowAddStepDialog(false);
+      setIsAddingStep(false);
       setNewStepTitle("");
       setNewStepDescription("");
       loadWorkProcessSteps();
@@ -255,7 +312,7 @@ const About = () => {
       if (error) throw error;
 
       toast.success('Гарантия добавлена');
-      setShowAddGuaranteeDialog(false);
+      setIsAddingGuarantee(false);
       setNewGuaranteeText("");
       loadSafetyGuarantees();
     } catch (error) {
@@ -470,7 +527,7 @@ const About = () => {
                   className="text-4xl font-display font-bold text-center flex-1"
                 />
                 {isAdmin && (
-                  <Button onClick={() => setShowAddStepDialog(true)} size="sm" className="ml-4">
+                  <Button onClick={() => setIsAddingStep(true)} size="sm" className="ml-4">
                     <Plus className="h-4 w-4 mr-2" />
                     Добавить
                   </Button>
@@ -500,7 +557,7 @@ const About = () => {
                   className="text-3xl font-display font-semibold text-primary text-center flex-1"
                 />
                 {isAdmin && (
-                  <Button onClick={() => setShowAddGuaranteeDialog(true)} size="sm" className="ml-4">
+                  <Button onClick={() => setIsAddingGuarantee(true)} size="sm" className="ml-4">
                     <Plus className="h-4 w-4 mr-2" />
                     Добавить
                   </Button>

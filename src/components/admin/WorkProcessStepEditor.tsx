@@ -43,7 +43,7 @@ export const WorkProcessStepEditor = ({ step, onUpdate }: WorkProcessStepEditorP
         .from('work_process_steps')
         .update({
           title: editedTitle,
-          description: editedDescription,
+          description: editedDescription
         })
         .eq('id', step.id);
 
@@ -77,7 +77,7 @@ export const WorkProcessStepEditor = ({ step, onUpdate }: WorkProcessStepEditorP
 
   if (!isAdmin) {
     return (
-      <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center">
+      <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center animate-fade-in">
         <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
           <span className="text-2xl font-semibold text-primary">{step.step_number}</span>
         </div>
@@ -122,20 +122,20 @@ export const WorkProcessStepEditor = ({ step, onUpdate }: WorkProcessStepEditorP
 
   return (
     <>
-      <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center relative group">
+      <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-all hover-glow text-center animate-fade-in relative group">
         <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
-            size="sm"
-            variant="secondary"
             onClick={() => setIsEditing(true)}
+            variant="secondary"
+            size="sm"
             className="h-8 w-8 p-0"
           >
             <Pencil className="h-4 w-4" />
           </Button>
           <Button
-            size="sm"
-            variant="destructive"
             onClick={() => setShowDeleteDialog(true)}
+            variant="destructive"
+            size="sm"
             className="h-8 w-8 p-0"
           >
             <Trash2 className="h-4 w-4" />
@@ -153,7 +153,7 @@ export const WorkProcessStepEditor = ({ step, onUpdate }: WorkProcessStepEditorP
           <AlertDialogHeader>
             <AlertDialogTitle>Удалить шаг?</AlertDialogTitle>
             <AlertDialogDescription>
-              Это действие нельзя отменить. Шаг будет удален навсегда.
+              Это действие нельзя отменить.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
