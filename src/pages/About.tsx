@@ -637,7 +637,7 @@ const About = () => {
       </AlertDialog>
 
       {/* Add Work Process Step Dialog */}
-      <Dialog open={showAddStepDialog} onOpenChange={setShowAddStepDialog}>
+      <Dialog open={isAddingStep} onOpenChange={setIsAddingStep}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Добавить шаг процесса</DialogTitle>
@@ -655,10 +655,10 @@ const About = () => {
               rows={3}
             />
             <div className="flex gap-2 justify-end">
-              <Button variant="outline" onClick={() => setShowAddStepDialog(false)}>
+              <Button variant="outline" onClick={() => setIsAddingStep(false)}>
                 Отмена
               </Button>
-              <Button onClick={handleAddWorkProcessStep}>
+              <Button onClick={handleAddStep}>
                 Добавить
               </Button>
             </div>
@@ -667,7 +667,7 @@ const About = () => {
       </Dialog>
 
       {/* Add Safety Guarantee Dialog */}
-      <Dialog open={showAddGuaranteeDialog} onOpenChange={setShowAddGuaranteeDialog}>
+      <Dialog open={isAddingGuarantee} onOpenChange={setIsAddingGuarantee}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Добавить гарантию безопасности</DialogTitle>
@@ -679,10 +679,10 @@ const About = () => {
               onChange={(e) => setNewGuaranteeText(e.target.value)}
             />
             <div className="flex gap-2 justify-end">
-              <Button variant="outline" onClick={() => setShowAddGuaranteeDialog(false)}>
+              <Button variant="outline" onClick={() => setIsAddingGuarantee(false)}>
                 Отмена
               </Button>
-              <Button onClick={handleAddSafetyGuarantee}>
+              <Button onClick={handleAddGuarantee}>
                 Добавить
               </Button>
             </div>
