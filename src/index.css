@@ -8,31 +8,31 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Medical Professional Theme - Dark Mode */
-    --background: 215 25% 15%;
-    --foreground: 210 20% 98%;
-    --card: 220 18% 12%;
-    --card-foreground: 210 20% 98%;
-    --popover: 220 18% 12%;
-    --popover-foreground: 210 20% 98%;
+    /* Modern Dark Theme with Better Contrast */
+    --background: 220 20% 12%;
+    --foreground: 210 15% 95%;
+    --card: 220 18% 16%;
+    --card-foreground: 210 15% 95%;
+    --popover: 220 18% 16%;
+    --popover-foreground: 210 15% 95%;
     
-    /* Medical cyan/teal accent */
-    --primary: 187 85% 55%;
-    --primary-foreground: 220 20% 8%;
+    /* Bright cyan/teal accent for better visibility */
+    --primary: 187 85% 60%;
+    --primary-foreground: 220 20% 10%;
     
-    /* Professional grays */
-    --secondary: 220 15% 20%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 220 15% 18%;
-    --muted-foreground: 215 15% 70%;
-    --accent: 187 85% 55%;
-    --accent-foreground: 220 20% 8%;
+    /* Professional grays with better contrast */
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 210 15% 95%;
+    --muted: 220 15% 22%;
+    --muted-foreground: 215 15% 75%;
+    --accent: 187 85% 60%;
+    --accent-foreground: 220 20% 10%;
     
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 15% 22%;
-    --input: 220 15% 18%;
-    --ring: 187 85% 55%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 15% 95%;
+    --border: 220 15% 28%;
+    --input: 220 15% 22%;
+    --ring: 187 85% 60%;
     
     --radius: 0.75rem;
     
@@ -46,14 +46,10 @@ All colors MUST be HSL.
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Admin mode background indicator */
+  /* Admin mode background - same as normal mode */
   .admin-mode {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(45 20% 95%) 100%);
+    background: hsl(var(--background));
     min-height: 100vh;
-  }
-
-  .dark .admin-mode {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(45 15% 12%) 100%);
   }
   
   h1, h2, h3, h4, h5, h6 {
