@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Menu, X, Phone, LogOut, Shield } from "lucide-react";
+import { Menu, X, Phone, LogOut } from "lucide-react";
 import { useAdmin } from "@/contexts/AdminContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -85,15 +85,13 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
             {isAdmin && (
               <Button
-                asChild
+                onClick={handleLogout}
                 size="sm"
                 variant="outline"
                 className="mr-1 lg:mr-2"
               >
-                <a href="/admin-logs">
-                  <Shield className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
-                  <span className="text-xs">Логи</span>
-                </a>
+                <LogOut className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
+                <span className="text-xs">Выйти</span>
               </Button>
             )}
             <a
@@ -187,6 +185,19 @@ const Header = () => {
                 Записаться
               </a>
             </Button>
+            {isAdmin && (
+              <Button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                variant="outline"
+                className="w-full"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Выйти
+              </Button>
+            )}
           </div>
         )}
       </nav>

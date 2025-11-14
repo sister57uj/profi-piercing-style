@@ -11,7 +11,6 @@ import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import Contacts from "./pages/Contacts";
 import AuthPage from "./pages/AuthPage";
-import AdminPanel from "./pages/AdminPanel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,7 +41,6 @@ const AppContent = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/profi-admin-2025" element={<AuthPage />} />
-          <Route path="/admin-logs" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
