@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { AdminHelper } from "@/components/admin/AdminHelper";
 import { EditableText } from "@/components/admin/EditableText";
 import { EditableLink } from "@/components/admin/EditableLink";
+import { AddTextBlockButton } from "@/components/admin/AddTextBlockButton";
 import { PricingServiceEditor, AddServiceButton } from "@/components/admin/PricingServiceEditor";
 import { JewelryItemEditor, AddJewelryButton } from "@/components/admin/JewelryItemEditor";
 import { supabase } from "@/integrations/supabase/client";
@@ -296,6 +297,16 @@ const Pricing = () => {
                   </DialogContent>
                 </Dialog>
               </div>
+            </div>
+
+            {/* Add custom text block */}
+            <div className="mt-8">
+              <AddTextBlockButton
+                page="pricing"
+                section="custom"
+                onAdd={loadContent}
+                buttonText="Добавить информационный блок"
+              />
             </div>
           </div>
         </div>
