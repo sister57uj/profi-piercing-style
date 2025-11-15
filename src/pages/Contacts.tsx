@@ -4,6 +4,7 @@ import { AdminHelper } from "@/components/admin/AdminHelper";
 import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
 import { EditableLink } from "@/components/admin/EditableLink";
+import { AddTextBlockButton } from "@/components/admin/AddTextBlockButton";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -325,6 +326,16 @@ const Contacts = () => {
                   Удобная транспортная доступность и парковка рядом.
                 </p>
               </div>
+            </div>
+
+            {/* Add custom text block */}
+            <div className="mt-8">
+              <AddTextBlockButton
+                page="contacts"
+                section="custom"
+                onAdd={loadContent}
+                buttonText="Добавить информационный блок"
+              />
             </div>
           </div>
         </div>

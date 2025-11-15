@@ -8,6 +8,10 @@ import { EmployeeEditor } from "@/components/admin/EmployeeEditor";
 import { ValueCardEditor } from "@/components/admin/ValueCardEditor";
 import { WorkProcessStepEditor } from "@/components/admin/WorkProcessStepEditor";
 import { SafetyGuaranteeEditor } from "@/components/admin/SafetyGuaranteeEditor";
+import { AddValueCardButton } from "@/components/admin/AddValueCardButton";
+import { AddWorkProcessStepButton } from "@/components/admin/AddWorkProcessStepButton";
+import { AddSafetyGuaranteeButton } from "@/components/admin/AddSafetyGuaranteeButton";
+import { AddTextBlockButton } from "@/components/admin/AddTextBlockButton";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdmin } from "@/contexts/AdminContext";
 import { Button } from "@/components/ui/button";
@@ -449,6 +453,14 @@ const About = () => {
                   />
                 </div>
               </div>
+              <div className="mt-6">
+                <AddTextBlockButton
+                  page="about"
+                  section="history"
+                  onAdd={loadContent}
+                  buttonText="Добавить параграф в историю"
+                />
+              </div>
             </div>
 
             {/* Ценности */}
@@ -474,6 +486,7 @@ const About = () => {
                     setValue1Title(title);
                     setValue1Desc(desc);
                   }}
+                  onDelete={loadContent}
                 />
                 <ValueCardEditor
                   icon={<Award className="h-10 w-10 text-primary mb-4" />}
@@ -486,6 +499,7 @@ const About = () => {
                     setValue2Title(title);
                     setValue2Desc(desc);
                   }}
+                  onDelete={loadContent}
                 />
                 <ValueCardEditor
                   icon={<Heart className="h-10 w-10 text-accent mb-4" />}
@@ -498,6 +512,7 @@ const About = () => {
                     setValue3Title(title);
                     setValue3Desc(desc);
                   }}
+                  onDelete={loadContent}
                 />
                 <ValueCardEditor
                   icon={<TrendingUp className="h-10 w-10 text-primary mb-4" />}
@@ -510,29 +525,27 @@ const About = () => {
                     setValue4Title(title);
                     setValue4Desc(desc);
                   }}
+                  onDelete={loadContent}
+                />
+                <AddValueCardButton
+                  page="about"
+                  section="values"
+                  onAdd={loadContent}
                 />
               </div>
             </div>
 
             {/* Процесс работы */}
             <div className="mb-16">
-              <div className="flex items-center justify-between mb-12">
-                <EditableText
-                  initialValue={processTitle}
-                  onSave={setProcessTitle}
-                  page="about"
-                  section="process"
-                  contentKey="process_title"
-                  as="h2"
-                  className="text-4xl font-display font-bold text-center flex-1"
-                />
-                {isAdmin && (
-                  <Button onClick={() => setIsAddingStep(true)} size="sm" className="ml-4">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Добавить
-                  </Button>
-                )}
-              </div>
+              <EditableText
+                initialValue={processTitle}
+                onSave={setProcessTitle}
+                page="about"
+                section="process"
+                contentKey="process_title"
+                as="h2"
+                className="text-4xl font-display font-bold text-center mb-12"
+              />
               <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 {workProcessSteps.map((step) => (
                   <WorkProcessStepEditor
@@ -542,27 +555,27 @@ const About = () => {
                   />
                 ))}
               </div>
+              {isAdmin && (
+                <div className="mt-6">
+                  <AddWorkProcessStepButton
+                    onAdd={loadWorkProcessSteps}
+                    nextStepNumber={workProcessSteps.length + 1}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Гарантии безопасности */}
             <div className="bg-card p-8 rounded-lg border border-primary/20 mb-16">
-              <div className="flex items-center justify-between mb-6">
-                <EditableText
-                  initialValue={safetyTitle}
-                  onSave={setSafetyTitle}
-                  page="about"
-                  section="safety"
-                  contentKey="safety_title"
-                  as="h2"
-                  className="text-3xl font-display font-semibold text-primary text-center flex-1"
-                />
-                {isAdmin && (
-                  <Button onClick={() => setIsAddingGuarantee(true)} size="sm" className="ml-4">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Добавить
-                  </Button>
-                )}
-              </div>
+              <EditableText
+                initialValue={safetyTitle}
+                onSave={setSafetyTitle}
+                page="about"
+                section="safety"
+                contentKey="safety_title"
+                as="h2"
+                className="text-3xl font-display font-semibold text-primary text-center mb-6"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {safetyGuarantees.map((guarantee) => (
                   <SafetyGuaranteeEditor
@@ -572,6 +585,14 @@ const About = () => {
                   />
                 ))}
               </div>
+              {isAdmin && (
+                <div className="mt-6">
+                  <AddSafetyGuaranteeButton
+                    onAdd={loadSafetyGuarantees}
+                    nextSortOrder={safetyGuarantees.length + 1}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Признание */}
@@ -635,60 +656,6 @@ const About = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
-      {/* Add Work Process Step Dialog */}
-      <Dialog open={isAddingStep} onOpenChange={setIsAddingStep}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Добавить шаг процесса</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <Input
-              placeholder="Заголовок"
-              value={newStepTitle}
-              onChange={(e) => setNewStepTitle(e.target.value)}
-            />
-            <Textarea
-              placeholder="Описание"
-              value={newStepDescription}
-              onChange={(e) => setNewStepDescription(e.target.value)}
-              rows={3}
-            />
-            <div className="flex gap-2 justify-end">
-              <Button variant="outline" onClick={() => setIsAddingStep(false)}>
-                Отмена
-              </Button>
-              <Button onClick={handleAddStep}>
-                Добавить
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Add Safety Guarantee Dialog */}
-      <Dialog open={isAddingGuarantee} onOpenChange={setIsAddingGuarantee}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Добавить гарантию безопасности</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <Input
-              placeholder="Текст гарантии"
-              value={newGuaranteeText}
-              onChange={(e) => setNewGuaranteeText(e.target.value)}
-            />
-            <div className="flex gap-2 justify-end">
-              <Button variant="outline" onClick={() => setIsAddingGuarantee(false)}>
-                Отмена
-              </Button>
-              <Button onClick={handleAddGuarantee}>
-                Добавить
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
