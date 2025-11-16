@@ -62,7 +62,7 @@ const Hero = () => {
       <div className="container mx-auto px-3 sm:px-4 relative z-10 max-w-full">
         <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in py-12 sm:py-16 md:py-20 overflow-hidden">
           <div className="space-y-3 sm:space-y-4 md:space-y-5">
-            <div className="inline-block px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 mb-3 sm:mb-4 md:mb-5">
+            <div className="inline-block px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 rounded-full bg-primary/20 border-2 border-primary/50 mb-3 sm:mb-4 md:mb-5 backdrop-blur-sm">
               <EditableText
                 initialValue={tagline}
                 onSave={setTagline}
@@ -70,11 +70,11 @@ const Hero = () => {
                 section="hero"
                 contentKey="tagline"
                 as="p"
-                className="text-primary text-[10px] sm:text-xs md:text-sm font-medium tracking-wide break-words"
+                className="neon-text-cyan text-[10px] sm:text-xs md:text-sm font-bold tracking-wide break-words uppercase"
               />
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-foreground leading-[1.1] break-words text-center px-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold leading-[1.1] break-words text-center px-2">
               <EditableText
                 initialValue={title}
                 onSave={setTitle}
@@ -82,7 +82,7 @@ const Hero = () => {
                 section="hero"
                 contentKey="title"
                 as="span"
-                className="inline-block break-words"
+                className="inline-block break-words text-foreground"
               />
               <EditableText
                 initialValue={subtitle}
@@ -91,7 +91,7 @@ const Hero = () => {
                 section="hero"
                 contentKey="subtitle"
                 as="span"
-                className="block text-primary mt-2 sm:mt-3 break-words"
+                className="block neon-text-pink mt-2 sm:mt-3 break-words font-extrabold"
               />
             </h1>
           </div>
