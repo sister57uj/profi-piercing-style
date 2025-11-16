@@ -58,12 +58,12 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+      <nav className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
+        <div className="flex items-center justify-between gap-2">
           {/* Logo */}
-          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-1 sm:gap-2 hover:opacity-80 transition-opacity">
-            <img src={logo} alt="Пирсинг Профи" className="h-5 w-5 sm:h-8 sm:w-8" />
-            <span className="text-xs sm:text-base md:text-lg font-bebas tracking-wider neon-text-pink">
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-1 sm:gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
+            <img src={logo} alt="Пирсинг Профи" className="h-6 w-6 sm:h-8 sm:w-8" />
+            <span className="text-sm sm:text-base md:text-lg font-bebas tracking-wide neon-text-pink whitespace-nowrap">
               Пирсинг Профи
             </span>
           </Link>
@@ -82,13 +82,13 @@ const Header = () => {
           </div>
 
           {/* Social Links & CTA */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-2">
+          <div className="hidden md:flex items-center gap-1 lg:gap-2 flex-shrink-0">
             {isAdmin && (
               <Button
                 onClick={handleLogout}
                 size="sm"
                 variant="outline"
-                className="mr-1 lg:mr-2"
+                className="mr-1 lg:mr-2 whitespace-nowrap"
               >
                 <LogOut className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
                 <span className="text-xs">Выйти</span>
@@ -121,7 +121,7 @@ const Header = () => {
             <Button
               asChild
               size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-xs px-2 lg:px-3"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hover-glow text-xs px-2 lg:px-3 whitespace-nowrap"
             >
               <a href="https://dikidi.net/1196602" target="_blank" rel="noopener noreferrer">
                 Записаться
@@ -132,31 +132,32 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground p-1.5 hover:bg-accent/10 rounded-lg transition-colors flex-shrink-0"
+            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4 animate-fade-in">
+          <div className="md:hidden mt-4 pb-4 space-y-4 animate-fade-in overflow-hidden px-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsMenuOpen(false)}
-                className="block text-foreground hover:text-primary transition-colors font-medium"
+                className="block text-foreground hover:text-primary transition-colors font-medium text-sm"
               >
                 {item.name}
               </Link>
             ))}
-            <div className="flex gap-4 pt-4">
+            <div className="flex gap-3 pt-4">
               <a 
                 href="https://instagram.com/piercing_profi_ekaterina?igsh=MWtrcXNycjhzNmo4bw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 hover:scale-110 transition-all"
+                className="h-8 w-8 hover:scale-110 transition-all flex-shrink-0"
               >
                 <img src={instagramIcon} alt="Instagram" className="w-full h-full object-cover rounded-lg" />
               </a>
@@ -164,7 +165,7 @@ const Header = () => {
                 href="https://t.me/piercing_prof" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 hover:scale-110 transition-all"
+                className="h-8 w-8 hover:scale-110 transition-all flex-shrink-0"
               >
                 <img src={telegramIcon} alt="Telegram" className="w-full h-full object-cover rounded-full" />
               </a>
@@ -172,7 +173,7 @@ const Header = () => {
                 href="https://vk.com/piercing_profi24" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="h-9 w-9 hover:scale-110 transition-all"
+                className="h-8 w-8 hover:scale-110 transition-all flex-shrink-0"
               >
                 <img src={vkIcon} alt="VK" className="w-full h-full object-cover rounded-lg" />
               </a>
