@@ -35,12 +35,12 @@ export const BadgeEditor = ({
 
   if (!isAdmin) {
     return (
-      <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift">
-        <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+      <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift overflow-hidden">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0">
           {icon}
         </div>
-        <p className="text-foreground font-semibold text-xs sm:text-sm mb-0.5">{title}</p>
-        <p className="text-muted-foreground text-[10px] sm:text-xs">{description}</p>
+        <p className="text-foreground font-semibold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
+        <p className="text-muted-foreground text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
       </div>
     );
   }
@@ -89,28 +89,28 @@ export const BadgeEditor = ({
 
   if (isEditing) {
     return (
-      <div className="bg-card/50 backdrop-blur-sm border border-primary rounded-lg p-2 sm:p-3 md:p-4 space-y-2">
-        <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+      <div className="bg-card/50 backdrop-blur-sm border border-primary rounded-lg p-2 sm:p-3 md:p-4 space-y-2 overflow-hidden">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0">
           {icon}
         </div>
         <Input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Заголовок"
-          className="text-xs sm:text-sm"
+          className="text-[10px] sm:text-xs md:text-sm"
         />
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Описание"
-          className="text-[10px] sm:text-xs min-h-[60px]"
+          className="text-[8px] sm:text-[10px] md:text-xs min-h-[50px] sm:min-h-[60px]"
         />
         <div className="flex gap-2 justify-center">
           <Button
             size="sm"
             onClick={handleSave}
             disabled={isSaving}
-            className="bg-primary text-primary-foreground"
+            className="bg-primary text-primary-foreground text-[10px] sm:text-xs px-2 py-1"
           >
             <Save className="h-3 w-3 mr-1" />
             Сохранить
@@ -120,6 +120,7 @@ export const BadgeEditor = ({
             variant="outline"
             onClick={handleCancel}
             disabled={isSaving}
+            className="text-[10px] sm:text-xs px-2 py-1"
           >
             <X className="h-3 w-3 mr-1" />
             Отмена
@@ -130,18 +131,18 @@ export const BadgeEditor = ({
   }
 
   return (
-    <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift relative group">
-      <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2">
+    <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift relative group overflow-hidden">
+      <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0">
         {icon}
       </div>
-      <p className="text-foreground font-semibold text-xs sm:text-sm mb-0.5">{title}</p>
-      <p className="text-muted-foreground text-[10px] sm:text-xs">{description}</p>
+      <p className="text-foreground font-semibold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
+      <p className="text-muted-foreground text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
       
       <Button
         size="sm"
         variant="ghost"
         onClick={() => setIsEditing(true)}
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
       >
         <Pencil className="h-3 w-3" />
       </Button>
