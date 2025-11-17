@@ -35,12 +35,12 @@ export const BadgeEditor = ({
 
   if (!isAdmin) {
     return (
-      <div className="bg-card/70 backdrop-blur-md border-2 border-primary/40 rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/70 transition-all hover-lift overflow-hidden hover:bg-card/80">
-        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0 shadow-lg shadow-primary/30">
+      <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift overflow-hidden">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0">
           {icon}
         </div>
-        <p className="text-foreground font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
-        <p className="text-muted-foreground font-medium text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
+        <p className="text-foreground font-semibold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
+        <p className="text-muted-foreground text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
       </div>
     );
   }
@@ -131,12 +131,12 @@ export const BadgeEditor = ({
   }
 
   return (
-    <div className="bg-card/70 backdrop-blur-md border-2 border-primary/40 rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/70 transition-all hover-lift relative group overflow-hidden hover:bg-card/80">
-      <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0 shadow-lg shadow-primary/30">
+    <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-3 md:p-4 hover:border-primary/50 transition-all hover-lift relative group overflow-hidden">
+      <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1 sm:mb-2 flex-shrink-0">
         {icon}
       </div>
-      <p className="text-foreground font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
-      <p className="text-muted-foreground font-medium text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
+      <p className="text-foreground font-semibold text-[10px] sm:text-xs md:text-sm mb-0.5 break-words text-center leading-tight">{title}</p>
+      <p className="text-muted-foreground text-[8px] sm:text-[10px] md:text-xs break-words text-center leading-tight">{description}</p>
       
       <Button
         size="sm"
