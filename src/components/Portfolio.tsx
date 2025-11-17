@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { EditableText } from "@/components/admin/EditableText";
 import { PortfolioItemEditor } from "@/components/admin/PortfolioItemEditor";
+import { FullscreenGallery } from "@/components/FullscreenGallery";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdmin } from "@/contexts/AdminContext";
 import { useToast } from "@/hooks/use-toast";
-import { Pencil, Plus } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -36,6 +37,9 @@ const Portfolio = () => {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [newItemTitle, setNewItemTitle] = useState("");
   const [newItemCategory, setNewItemCategory] = useState("");
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [selectedItemImages, setSelectedItemImages] = useState<string[]>([]);
+  const [selectedItemTitle, setSelectedItemTitle] = useState("");
   const { isAdmin } = useAdmin();
   const { toast } = useToast();
 
@@ -140,6 +144,19 @@ const Portfolio = () => {
     }
   };
 
+  const handleOpenGallery = (item: PortfolioItem) => {
+    const itemImages = images
+      .filter(img => img.portfolio_item_id === item.id)
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .map(img => img.image_url);
+    
+    if (itemImages.length > 0) {
+      setSelectedItemImages(itemImages);
+      setSelectedItemTitle(item.title);
+      setGalleryOpen(true);
+    }
+  };
+
   return (
     <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden" id="portfolio">
       <div className="container mx-auto px-3 sm:px-4 relative z-10">
@@ -183,8 +200,9 @@ const Portfolio = () => {
               return (
                 <div
                   key={item.id}
-                  className="group relative aspect-square bg-background rounded-lg overflow-hidden border border-border hover:border-primary/60 transition-all hover-lift animate-fade-in"
+                  className="group relative aspect-square bg-background rounded-lg overflow-hidden border border-border hover:border-primary/60 transition-all hover-lift animate-fade-in cursor-pointer"
                   style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => !isAdmin && handleOpenGallery(item)}
                 >
                   {displayImage && (
                     <img 
@@ -208,7 +226,10 @@ const Portfolio = () => {
                       <Button
                         size="sm"
                         variant="secondary"
-                        onClick={() => setEditingItem(item)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingItem(item);
+                        }}
                         className="touch-manipulation h-8 sm:h-9"
                       >
                         <Pencil className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -216,7 +237,10 @@ const Portfolio = () => {
                       <Button
                         size="sm"
                         variant="destructive"
-                        onClick={() => handleDeleteItem(item.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteItem(item.id);
+                        }}
                         className="touch-manipulation h-8 sm:h-9"
                       >
                         ✕
@@ -270,6 +294,13 @@ const Portfolio = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      <FullscreenGallery
+        images={selectedItemImages}
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        title={selectedItemTitle}
+      />
     </section>
   );
 };
