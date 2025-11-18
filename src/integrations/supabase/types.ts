@@ -22,6 +22,7 @@ export type Database = {
           experience: string | null
           first_name: string
           id: string
+          is_hidden: boolean | null
           last_name: string
           photo_url: string | null
           sort_order: number
@@ -34,6 +35,7 @@ export type Database = {
           experience?: string | null
           first_name: string
           id?: string
+          is_hidden?: boolean | null
           last_name: string
           photo_url?: string | null
           sort_order?: number
@@ -46,6 +48,7 @@ export type Database = {
           experience?: string | null
           first_name?: string
           id?: string
+          is_hidden?: boolean | null
           last_name?: string
           photo_url?: string | null
           sort_order?: number
@@ -58,6 +61,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          is_hidden: boolean | null
           price_from: number
           sort_order: number
           title: string
@@ -67,6 +71,7 @@ export type Database = {
           created_at?: string
           description: string
           id?: string
+          is_hidden?: boolean | null
           price_from: number
           sort_order?: number
           title: string
@@ -76,6 +81,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          is_hidden?: boolean | null
           price_from?: number
           sort_order?: number
           title?: string
@@ -121,6 +127,7 @@ export type Database = {
           cover_image: string | null
           created_at: string
           id: string
+          is_hidden: boolean | null
           sort_order: number
           title: string
           updated_at: string
@@ -130,6 +137,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           title: string
           updated_at?: string
@@ -139,6 +147,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           title?: string
           updated_at?: string
@@ -150,6 +159,7 @@ export type Database = {
           category: string
           created_at: string
           id: string
+          is_hidden: boolean | null
           name: string
           price: number
           sort_order: number
@@ -159,6 +169,7 @@ export type Database = {
           category: string
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           name: string
           price: number
           sort_order?: number
@@ -168,6 +179,7 @@ export type Database = {
           category?: string
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           name?: string
           price?: number
           sort_order?: number
@@ -179,6 +191,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          is_hidden: boolean | null
           sort_order: number
           text: string
           updated_at: string
@@ -186,6 +199,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           text: string
           updated_at?: string
@@ -193,6 +207,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           text?: string
           updated_at?: string
@@ -204,6 +219,7 @@ export type Database = {
           content_key: string
           content_value: string
           id: string
+          is_hidden: boolean | null
           page: string
           section: string
           updated_at: string | null
@@ -213,6 +229,7 @@ export type Database = {
           content_key: string
           content_value: string
           id?: string
+          is_hidden?: boolean | null
           page: string
           section: string
           updated_at?: string | null
@@ -222,6 +239,7 @@ export type Database = {
           content_key?: string
           content_value?: string
           id?: string
+          is_hidden?: boolean | null
           page?: string
           section?: string
           updated_at?: string | null
@@ -255,6 +273,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          is_hidden: boolean | null
           sort_order: number
           step_number: number
           title: string
@@ -264,6 +283,7 @@ export type Database = {
           created_at?: string
           description: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           step_number: number
           title: string
@@ -273,6 +293,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          is_hidden?: boolean | null
           sort_order?: number
           step_number?: number
           title?: string

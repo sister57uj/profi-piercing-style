@@ -482,10 +482,7 @@ const About = () => {
                   page="about"
                   section="values"
                   contentKey="value1"
-                  onSave={(title, desc) => {
-                    setValue1Title(title);
-                    setValue1Desc(desc);
-                  }}
+                  onSave={loadContent}
                   onDelete={loadContent}
                 />
                 <ValueCardEditor
@@ -495,10 +492,7 @@ const About = () => {
                   page="about"
                   section="values"
                   contentKey="value2"
-                  onSave={(title, desc) => {
-                    setValue2Title(title);
-                    setValue2Desc(desc);
-                  }}
+                  onSave={loadContent}
                   onDelete={loadContent}
                 />
                 <ValueCardEditor
@@ -508,10 +502,7 @@ const About = () => {
                   page="about"
                   section="values"
                   contentKey="value3"
-                  onSave={(title, desc) => {
-                    setValue3Title(title);
-                    setValue3Desc(desc);
-                  }}
+                  onSave={loadContent}
                   onDelete={loadContent}
                 />
                 <ValueCardEditor
@@ -521,10 +512,7 @@ const About = () => {
                   page="about"
                   section="values"
                   contentKey="value4"
-                  onSave={(title, desc) => {
-                    setValue4Title(title);
-                    setValue4Desc(desc);
-                  }}
+                  onSave={loadContent}
                   onDelete={loadContent}
                 />
                 <AddValueCardButton

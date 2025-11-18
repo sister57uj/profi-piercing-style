@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Pencil, Check, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAdmin } from '@/contexts/AdminContext';
+import { EditableWrapper } from './EditableWrapper';
 
 interface EditableTextProps {
   initialValue: string;
@@ -16,6 +17,9 @@ interface EditableTextProps {
   multiline?: boolean;
   className?: string;
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
+  onDelete?: () => void;
+  isHidden?: boolean;
+  onToggleVisibility?: () => void;
 }
 
 export const EditableText = ({
@@ -26,13 +30,20 @@ export const EditableText = ({
   contentKey,
   multiline = false,
   className = '',
-  as: Component = 'p'
+  as: Component = 'p',
+  onDelete,
+  isHidden = false,
+  onToggleVisibility,
 }: EditableTextProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(initialValue);
   const [isSaving, setIsSaving] = useState(false);
   const { isAdmin } = useAdmin();
   const { toast } = useToast();
+
+  if (!isAdmin && isHidden) {
+    return null;
+  }
 
   if (!isAdmin) {
     return <Component className={className}>{value}</Component>;
@@ -121,16 +132,15 @@ export const EditableText = ({
   }
 
   return (
-    <div className="relative group inline-flex items-center gap-1.5 sm:gap-2">
+    <EditableWrapper
+      onEdit={() => setIsEditing(true)}
+      onDelete={onDelete}
+      onToggleVisibility={onToggleVisibility}
+      isHidden={isHidden}
+      showDeleteButton={!!onDelete}
+      showVisibilityButton={!!onToggleVisibility}
+    >
       <Component className={className}>{value}</Component>
-      <Button
-        size="sm"
-        variant="ghost"
-        className="opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity p-1 h-auto touch-manipulation"
-        onClick={() => setIsEditing(true)}
-      >
-        <Pencil className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
-      </Button>
-    </div>
+    </EditableWrapper>
   );
 };
